@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+const signup = require('../components/methods/BackendConnection');
 
 const SignUp = () => {
     return (
