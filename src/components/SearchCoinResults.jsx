@@ -1,13 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { Link } from 'react-router-dom'
+import { Data } from '../components/methods/DataAPIs'
 
-const SearchCoinResults = ({ coin }) => {
+const test = async () => {
+    const res = await Data.getCoins('coins')
+    console.log(res)
+}
+
+const SearchCoinResults = ({ coinSearch }) => {
 
     const { addCoinWatchlist, watchlist, addCoinPortfolio, portfolio } = useContext(GlobalContext)
 
-    let storedWatchlist = watchlist.find((id) => id.symbol === coin.obj.symbol)
-    let storedPortfolio = portfolio.find((id) => id.symbol === coin.obj.symbol)
+    let storedWatchlist = watchlist.find((id) => id.symbol === coinSearch.coin.symbol)
+    let storedPortfolio = portfolio.find((id) => id.symbol === coinSearch.coin.symbol)
 
     const coinDisableWatchlist = storedWatchlist ? true : false
     const coinDisablePortfolio = storedPortfolio ? true : false
@@ -15,19 +21,13 @@ const SearchCoinResults = ({ coin }) => {
     return (
         <div>
 
-            <Link to={`/coins/${coin.obj.id}`}>
-                <img src={coin.obj.image.thumb} alt={coin.obj.id} />
-                <span>{coin.obj.symbol.toUpperCase() + ' - '}</span>
-
-                <span>
-                    <span>{coin.obj.id}</span>
-                    <span>{' || CURRENT PRICE: ' + coin.obj.market_data.current_price.usd}</span>
-                    <span>{' || MARKET CAP: ' + coin.obj.market_data.market_cap.usd}</span>
-                </span>
+            <Link to={`/coins/${coinSearch.coin.id}`}>
+                <span>{coinSearch.coin.symbol.toUpperCase() + ' - '}</span>
+                <span>{coinSearch.coin.name}</span>
             </Link>
             <span>
-                <span><button onClick={() => addCoinWatchlist(coin.obj)} disabled={coinDisableWatchlist}>+W</button></span>
-                <span><button onClick={() => addCoinPortfolio(coin.obj)} disabled={coinDisablePortfolio}>+P</button></span>
+                <span><button onClick={() => addCoinWatchlist(coinSearch.coin)} disabled={coinDisableWatchlist}>+W</button></span>
+                <span><button onClick={() => addCoinPortfolio(coinSearch.coin)} disabled={coinDisablePortfolio}>+P</button></span>
             </span>
 
         </div>

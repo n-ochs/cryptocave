@@ -19,17 +19,17 @@ const SearchCoins = () => {
 
         const tempResultsArray = []
 
-        const response = await Data.getCoins('coins')
+        const response = await Data.getCoins('coins/list')
         response.filter((coin) => {
             if (Filters.textSearch(coin.id, query) || Filters.textSearch(coin.symbol, query)) {
-                tempResultsArray.push({ obj: coin })
+                tempResultsArray.push({ coin })
             }
         })
 
         if (query === '') {
             setResults([])
         } else {
-            setResults(tempResultsArray)
+            setResults(tempResultsArray.slice(0, 5))
         }
     }, [query])
 
@@ -47,8 +47,8 @@ const SearchCoins = () => {
                 <ul>
                     {results.map((coin) => (
                         <li
-                            key={coin.obj.symbol}>
-                            <SearchCoinResults coin={coin} />
+                            key={coin.coin.id}>
+                            <SearchCoinResults coinSearch={coin} />
                         </li>
                     ))}
                 </ul>
