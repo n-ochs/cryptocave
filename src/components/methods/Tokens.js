@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 export const setAuthenticationToken = (token) => {
     if (token) {
-        Cookies.set('jsonwebtoken', token, {expires: 1});
+        Cookies.set('jsonwebtoken', token, {expires: 1/24});
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
     else {
