@@ -6,7 +6,7 @@ import Portfolio from './pages/Portfolio'
 import WatchList from './components/Watchlist'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
-import SignUp from './pages/SignUp'
+import Form from './components/Form'
 import Coin from './pages/Coin'
 import CoinList from './pages/CoinList'
 import Alerts from './components/Alerts'
@@ -22,7 +22,7 @@ function App() {
                     <Route path="/newslist" component={NewsList} />
                     <Route path="/watchlist" component={WatchList} />
                     <Route path="/portfolio" component={Portfolio} />
-                    <Route path="/signup" component={SignUp} />
+                    <Route path="/signup" component={Form} />
                     <Route path="/profile" component={Profile} />
                     <Route path="/coinlist" component={CoinList} />
                     <Route path="/alerts" component={Alerts} />
@@ -30,7 +30,7 @@ function App() {
                 </Switch>
             </BrowserRouter>
         </GlobalProvider>
-    )
-}
+    );
+};
 
 export default App
