@@ -13,7 +13,7 @@ const FormSignUp = ({ submitForm }) => {
 
                 {/* Username Field */}
                 <div>
-                    <label htmlFor="username" className="form-label">
+                    <label htmlFor="username">
                         Username
                     </label>
                     <input 
