@@ -10,6 +10,11 @@ export default (state, action) => {
                 ...state,
                 portfolio: [action.payload, ...state.portfolio]
             }
+        case 'REMOVE_COIN_FROM_WATCHLIST':
+            return {
+                ...state,
+                watchlist: state.watchlist.filter((coin) => coin.symbol !== action.payload)
+            }
         default:
             return state
     }

@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import CoinCardWatchlist from '../components/CoinCardWatchlist'
 
 const Watchlist = ({ }) => {
     const { watchlist } = useContext(GlobalContext)
+
     return (
         <div>
-            Watchlist - add remove button and price - add button badge to indicate length of watchlist array to user - maybe icon at bottom instead of nav item
-            {watchlist.map((coin) => {
-                return <h1>{coin.symbol}</h1>
-
-            })}
-
-
+            {watchlist.length > 0 ? (
+                <div>
+                    {watchlist.map(coin => <CoinCardWatchlist coin={coin} type="watchlist" />)}
+                </div>
+            ) : (<h1>No coins added</h1>)}
         </div>
     )
 }

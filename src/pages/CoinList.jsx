@@ -33,3 +33,6 @@ const CoinList = ({ match }) => {
 }
 
 export default CoinList
+
+
+
