@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createUser } from '../components/methods/BackendConnection';
 
 const useForm = (callback, validate) => {
 
@@ -23,14 +24,14 @@ const useForm = (callback, validate) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         setErrors(validate(values));
         setIsSubmitting(true);
     };
 
     useEffect(() => {
-        if(Object.keys(errors).length === 0 && isSubmitting) {
+        if (Object.keys(errors).length === 0 && isSubmitting) {
             callback();
+            createUser(values.email, values.password);
         };
     }, [errors]);
 
