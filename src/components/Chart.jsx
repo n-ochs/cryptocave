@@ -41,18 +41,21 @@ const Chart = ({ coin }) => {
                 .then(async res => {
                     await dateArr.push(days[i])
                     await priceArr.push(res.data.market_data.current_price.usd)
-                }).then(async () => {
-                    await setChartData({
-                        labels: await dateArr,
-                        datasets: [
-                            {
-                                label: 'Price',
-                                data: await priceArr,
-                                backgroundColor: [
-                                    'rgba(75, 192, 192, 0.6)'
-                                ]
-                            }]
-                    })
+                }).then(() => {
+                    if (dateArr.length >= days.length) {
+                        setChartData({
+                            labels: dateArr,
+                            datasets: [
+                                {
+                                    label: [],
+                                    data: priceArr,
+                                    backgroundColor: [
+                                        'rgba(75, 192, 192, 0.6)'
+                                    ]
+                                }]
+                        })
+                    }
+
                 })
 
                 .catch((err) => console.log(err))
