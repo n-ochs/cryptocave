@@ -11,7 +11,7 @@ const SearchCoinResults = ({ coinSearch }) => {
     function refreshPage() {
         setTimeout(() => {
             window.location.reload(false);
-        }, 500);
+        }, 100);
         console.log('page to reload')
     }
 

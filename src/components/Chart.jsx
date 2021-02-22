@@ -21,7 +21,6 @@ const Chart = ({ coin }) => {
 
     const chart = async () => {
 
-
         let priceArr = []
         let dateArr = []
         let days = getDays(30)
@@ -29,28 +28,23 @@ const Chart = ({ coin }) => {
             let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${days[i]}`
             await axios.get(url)
                 .then(async res => {
-
                     await dateArr.push(days[i])
                     await priceArr.push(res.data.market_data.current_price.usd)
-
+                }).then(async () => {
                     await setChartData({
-                        labels: await dateArr,
+                        labels: dateArr,
                         datasets: [
                             {
                                 label: 'Price',
-                                data: await priceArr,
+                                data: priceArr,
                                 backgroundColor: [
                                     'rgba(75, 192, 192, 0.6)'
                                 ]
                             }]
                     })
-
                 })
 
-
-
                 .catch((err) => console.log(err))
-
         }
 
     }
