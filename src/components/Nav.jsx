@@ -9,6 +9,9 @@ const Nav = () => {
     const details = isLoggedIn ? 'SignUp' : 'Profile'
 
 
+
+
+
     return (
         <nav>
             <div>

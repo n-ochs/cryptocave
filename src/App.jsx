@@ -13,6 +13,8 @@ import Alerts from './components/Alerts'
 import { GlobalProvider } from './context/GlobalState'
 
 function App() {
+
+
     return (
         <GlobalProvider>
             <BrowserRouter>

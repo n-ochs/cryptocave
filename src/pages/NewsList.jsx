@@ -12,9 +12,7 @@ const NewsList = ({ match }) => {
         const res = await data.json()
         setNews(res.results)
         console.log(res)
-
     }, [])
-
 
     return (
         <div>
@@ -33,7 +31,7 @@ const NewsList = ({ match }) => {
                 </ul>
             )
             }
-        </div >
+        </div>
     )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import Buttons from './Buttons'
+import Buttons from './controls/Buttons'
 
 const CoinCardWatchlist = ({ coin, type }) => {
     return (
