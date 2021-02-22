@@ -3,6 +3,17 @@ import { Line } from 'react-chartjs-2'
 import axios from 'axios'
 import moment from 'moment'
 
+
+
+
+/*
+
+commented out line 6846 in node_modules > chart.js > dist > chart.js to fix issue this however 
+caused the inability to interact with the chart. 
+
+*/
+
+
 const Chart = ({ coin }) => {
 
 
@@ -32,11 +43,11 @@ const Chart = ({ coin }) => {
                     await priceArr.push(res.data.market_data.current_price.usd)
                 }).then(async () => {
                     await setChartData({
-                        labels: dateArr,
+                        labels: await dateArr,
                         datasets: [
                             {
                                 label: 'Price',
-                                data: priceArr,
+                                data: await priceArr,
                                 backgroundColor: [
                                     'rgba(75, 192, 192, 0.6)'
                                 ]
@@ -49,33 +60,32 @@ const Chart = ({ coin }) => {
 
     }
 
+
     useEffect(() => {
         chart()
     }, [])
 
+
     return (
         <div>
-            {true && (
-                <Line
-                    data={chartData} options={{
-                        responsive: true,
-                        title: { text: 'Price - Last 30 Days', display: true },
-                        elements: {
-                            line: {
-                                tension: 0
-                            }
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
+            <Line
+                data={chartData} options={{
+                    responsive: true,
+                    title: { text: 'Price - Last 30 Days', display: true },
+                    elements: {
+                        line: {
+                            tension: 0
                         }
-                    }}
-                />
-            )}
-
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }}
+            />
         </div>
     )
 }
