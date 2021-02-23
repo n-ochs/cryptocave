@@ -17,10 +17,10 @@ caused the inability to interact with the chart.
 const Chart = ({ coin }) => {
 
 
-    const getDays = (timeframe) => {
+    const getDays = (time) => {
 
         const formattedDates = []
-        const lastNthDays = [...new Array(timeframe)].map((i, idx) => moment().startOf("day").subtract(idx, "days").format('L'));
+        const lastNthDays = [...new Array(time)].map((i, idx) => moment().startOf("day").subtract(idx, "days").format('L'));
         const splitDate = lastNthDays.map((day) => day.split('/'))
         for (const day of splitDate) {
             formattedDates.push(`${day[1]}-${day[0]}-${day[2]}`)
@@ -30,11 +30,11 @@ const Chart = ({ coin }) => {
 
     const [chartData, setChartData] = useState({})
 
-    const chart = async () => {
+    const chart = async (time) => {
 
         let priceArr = []
         let dateArr = []
-        let days = getDays(30)
+        let days = getDays(time)
         for (let i = days.length - 1; i >= 0; i--) {
             let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${days[i]}`
             await axios.get(url)
@@ -70,12 +70,15 @@ const Chart = ({ coin }) => {
 
 
     useEffect(() => {
-        chart()
+        chart(30)
     }, [])
 
 
     return (
         <div>
+            <button onClick={() => chart(15)}>Last 15 days</button>
+            <button onClick={() => chart(30)}>Last 30 days</button>
+            <button onClick={() => chart(60)}>Last 60 days</button>
             <Line
                 data={chartData} options={{
                     responsive: true,
