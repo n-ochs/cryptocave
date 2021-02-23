@@ -14,3 +14,10 @@ export const login = async (email, password) => {
         password: password
     });
 };
+
+export const verification = async (email, verificationCode) => {
+    await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/activate`, {
+        email: email,
+        verificationCode: verificationCode
+    });
+};

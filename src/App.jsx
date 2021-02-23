@@ -12,6 +12,7 @@ import CoinList from './pages/CoinList'
 import Alerts from './components/Alerts'
 import { GlobalProvider } from './context/GlobalState'
 import Login from './pages/FormLogin'
+import Activation from './components/Activation';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/portfolio" component={Portfolio} />
                     <Route path="/signup" component={Form} />
                     <Route path="/login" component={Login} />
+                    <Route path="/activation" component={Activation} />
                     <Route path="/profile" component={Profile} />
                     <Route path="/coinlist" component={CoinList} />
                     <Route path="/alerts" component={Alerts} />
