@@ -42,6 +42,9 @@ const Nav = () => {
                 <li>
                     <Link><SearchCoins /></Link>
                 </li>
+                <li>
+                    <Link to="/login">Login</Link>
+                </li>
 
 
 
