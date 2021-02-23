@@ -39,10 +39,15 @@ const Chart = ({ coin }) => {
             let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${days[i]}`
             await axios.get(url)
                 .then(async res => {
-                    await dateArr.push(days[i])
-                    await priceArr.push(res.data.market_data.current_price.usd)
+                    if (!res.data.market_data) {
+                        console.log('not finding data')
+                    } else {
+                        await dateArr.push(days[i])
+                        await priceArr.push(res.data.market_data.current_price.usd)
+                    }
+
                 }).then(() => {
-                    if (dateArr.length >= days.length) {
+                    if (dateArr.length === days.length) {
                         setChartData({
                             labels: dateArr,
                             datasets: [
@@ -81,10 +86,12 @@ const Chart = ({ coin }) => {
                         }
                     },
                     scales: {
+
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true
                             }
+
                         }]
                     }
                 }}

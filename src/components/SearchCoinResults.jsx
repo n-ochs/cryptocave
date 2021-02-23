@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { Link } from 'react-router-dom'
-import { Data } from '../components/methods/DataAPIs'
 import Popup from '../components/controls/Popup'
 import AddPortfolioForm from './AddPortfolioForm'
 

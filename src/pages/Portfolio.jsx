@@ -8,7 +8,7 @@ const Portfolio = ({ }) => {
             portfolio to include chart js, purchased coins, performance tracking, bank roll, 
             
             {portfolio.map((coin) => {
-                return <h1>{coin.symbol}</h1>
+                return <h1 key={coin.id}>{coin.symbol}</h1>
 
             })}
 

@@ -9,7 +9,6 @@ const CoinList = ({ match }) => {
 
     useEffect(async () => {
         const res = await Data.getCoins(`coins/list`)
-        console.log(res)
         setCoins(res)
     }, [match.params.id])
 
@@ -19,8 +18,8 @@ const CoinList = ({ match }) => {
             {coins && (
                 <ul>
                     {coins.map((coin) => (
-                        <Link to={`/coins/${coin.id}`}>
-                            <li key={coin.id}>
+                        <Link to={`/coins/${coin.id}`} key={coin.id}>
+                            <li>
                                 {coin.id}
                             </li>
                         </Link>

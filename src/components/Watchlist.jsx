@@ -9,7 +9,7 @@ const Watchlist = ({ }) => {
         <div>
             {watchlist.length > 0 ? (
                 <div>
-                    {watchlist.map(coin => <CoinCardWatchlist coin={coin} type="watchlist" />)}
+                    {watchlist.map(coin => <CoinCardWatchlist coin={coin} type="watchlist" key={coin.id} />)}
                 </div>
             ) : (<h1>No coins added</h1>)}
         </div>

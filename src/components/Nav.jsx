@@ -43,7 +43,7 @@ const Nav = () => {
                     </button>
                 </li>
                 <li>
-                    <Link to="#"><SearchCoins /></Link>
+                    <div><SearchCoins /></div>
                 </li>
 
 
