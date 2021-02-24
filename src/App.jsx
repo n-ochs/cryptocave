@@ -15,6 +15,8 @@ import Login from './pages/FormLogin'
 import Activation from './components/Activation';
 
 function App() {
+
+
     return (
         <GlobalProvider>
             <BrowserRouter>

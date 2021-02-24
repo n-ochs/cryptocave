@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Data } from '../components/methods/DataAPIs'
+import Chart from '../components/Chart'
 
 const Coin = ({ match }) => {
+
 
     const [coin, setCoin] = useState()
 
@@ -17,10 +19,10 @@ const Coin = ({ match }) => {
                     <img src={coin.image.large}></img>
                     <h1>{coin.id} - {coin.symbol}</h1>
                     <h3>last price: ${coin.market_data.current_price.usd}</h3>
+                    <Chart coin={coin} />
                     <p>{coin.description.en}</p>
                 </div>
             )}
-            <i>Coin individual - this will include coin name, ticker symbol, written overview of coin/business, fundamental data including volume, market cap etc, a time series line chart that will default to a certain time period (last 24h for example),  along with bigger buttons for addding to portfolio and watchlist. </i>
         </div>
     )
 }

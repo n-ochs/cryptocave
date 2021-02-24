@@ -29,7 +29,7 @@ const SearchCoins = () => {
         if (query === '') {
             setResults([])
         } else {
-            setResults(tempResultsArray.slice(0, 5))
+            setResults(tempResultsArray.sort((a, b) => a.coin.id.length - b.coin.id.length).slice(0, 10))
         }
     }, [query])
 

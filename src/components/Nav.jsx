@@ -9,6 +9,9 @@ const Nav = () => {
     const details = isLoggedIn ? 'SignUp' : 'Profile'
 
 
+
+
+
     return (
         <nav>
             <div>
@@ -40,7 +43,7 @@ const Nav = () => {
                     </button>
                 </li>
                 <li>
-                    <Link><SearchCoins /></Link>
+                    <div><SearchCoins /></div>
                 </li>
                 <li>
                     <Link to="/login">Login</Link>

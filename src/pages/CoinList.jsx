@@ -9,7 +9,6 @@ const CoinList = ({ match }) => {
 
     useEffect(async () => {
         const res = await Data.getCoins(`coins/list`)
-        console.log(res)
         setCoins(res)
     }, [match.params.id])
 
@@ -19,15 +18,14 @@ const CoinList = ({ match }) => {
             {coins && (
                 <ul>
                     {coins.map((coin) => (
-                        <Link to={`/coins/${coin.id}`}>
-                            <li key={coin.id}>
+                        <Link to={`/coins/${coin.id}`} key={coin.id}>
+                            <li>
                                 {coin.id}
                             </li>
                         </Link>
                     ))}
                 </ul>
             )}
-            coin list - standard list of coins, include market cap, current price, add button that once clicked expands to watchlist and portfolio. potentially have mini charts next to each coin as a quick visual overview of price action. custom sorting based on price, market cap , name etc
         </div>
     )
 }

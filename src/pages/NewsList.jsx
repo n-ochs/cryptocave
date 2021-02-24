@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { Data } from '../components/methods/DataAPIs'
-import { Link } from 'react-router-dom'
 
 
 const NewsList = ({ match }) => {
 
-    const [news, setNews] = useState(null)
+    const [newsFeed, setNewsFeed] = useState(null)
+    const [newsTop, setNewsTop] = useState(null)
+
 
     useEffect(async () => {
         const data = await fetch('/posts/?auth_token=e0a27bc786203eea879f983882f4b94dde4c690a&kind=news')
         const res = await data.json()
-        setNews(res.results)
-        console.log(res)
-
+        setNewsFeed(res.results)
     }, [])
 
+    useEffect(async () => {
+        const data = await fetch('http://newsapi.org/v2/everything?q=crypto&from=2021-01-23&sortBy=publishedAt&apiKey=c5277bbf8a444cbabab89db5e6b4fd47')
+        const res = await data.json()
+        setNewsTop(res.articles)
+        console.log(res.articles)
+    }, [])
 
     return (
         <div>
-            {news && (
+            {newsFeed && (
                 <ul>
-                    {news.map((article) => (
+                    <h1>news feed</h1>
+                    {newsFeed.map((article) => (
                         <div>
                             <a href={`${article.url}`}>
                                 <li key={article.id}>
@@ -31,9 +36,14 @@ const NewsList = ({ match }) => {
 
                     ))}
                 </ul>
-            )
-            }
-        </div >
+            )}
+
+            <ul>
+                <h1>Top News Articles</h1>
+
+            </ul>
+
+        </div>
     )
 }
 
