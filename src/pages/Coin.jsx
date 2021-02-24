@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Data } from '../components/methods/DataAPIs'
 import Chart from '../components/Chart'
+import CoinNewsFeed from '../components/CoinNewsFeed'
 
 const Coin = ({ match }) => {
 
@@ -10,7 +11,8 @@ const Coin = ({ match }) => {
     useEffect(async () => {
         const response = await Data.getCoins(`coins/${match.params.id}`)
         setCoin(response)
-    }, [match.params.id])
+        console.log(response)
+    }, [])
 
     return (
         <div>
@@ -21,6 +23,7 @@ const Coin = ({ match }) => {
                     <h3>last price: ${coin.market_data.current_price.usd}</h3>
                     <Chart coin={coin} />
                     <p>{coin.description.en}</p>
+                    <CoinNewsFeed coin={coin} />
                 </div>
             )}
         </div>

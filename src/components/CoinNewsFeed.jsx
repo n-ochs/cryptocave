@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 
-const NewsList = ({ match }) => {
+const CoinNewsFeed = ({ coin }) => {
 
-    const [newsTop, setNewsTop] = useState(null)
+    const [newsFeed, setNewsFeed] = useState(null)
 
 
     useEffect(async () => {
-        const res = await axios.get('http://newsapi.org/v2/everything?q=crypto&from=2021-01-23&sortBy=publishedAt&apiKey=c5277bbf8a444cbabab89db5e6b4fd47')
-        setNewsTop(res.data.articles)
+        const data = await axios.get(`/posts/?auth_token=e0a27bc786203eea879f983882f4b94dde4c690a&currencies=${coin.symbol}`)
+        setNewsFeed(data.data.results)
     }, [])
 
     return (
         <div>
-            {newsTop && (
+            {newsFeed && (
                 <ul>
-                    <h1>Top News Articles</h1>
-                    {newsTop.map((article) => (
+                    <h1>News Feed</h1>
+                    {newsFeed.map((article) => (
                         <div>
                             <a href={`${article.url}`}>
                                 <li key={article.id}>
@@ -30,17 +30,15 @@ const NewsList = ({ match }) => {
                 </ul>
             )}
 
-            <ul>
-
-
-            </ul>
 
         </div>
     )
 }
 
 
-export default NewsList
+export default CoinNewsFeed
+
+
 
 
 
