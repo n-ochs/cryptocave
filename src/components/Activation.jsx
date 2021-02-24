@@ -25,7 +25,7 @@ const Activation = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h1>Please log in to your account.</h1>
+                <h1>Please activate your account.</h1>
 
                 {/* Email Field */}
                 <div>
@@ -42,10 +42,10 @@ const Activation = () => {
                         </input>
                 </div>
 
-                {/* Password Field */}
+                {/* Activation Field */}
                 <div>
                     <label htmlFor="password">
-                        Password
+                        Activation Code
                     </label>
                     <input 
                         id="verificationCode"

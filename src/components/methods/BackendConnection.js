@@ -5,7 +5,14 @@ export const createUser = async (username, email, password) => {
         username: username,
         email: email,
         password: password
-    });
+    })
+    // .then(() => {
+    //     alert('success')
+    // })
+    // .catch(() => {
+    //     window.location.href = "https://cryptocave.netlify.app/SignUp";
+    //     alert('someting wong')
+    // })
 };
 
 export const login = async (email, password) => {
