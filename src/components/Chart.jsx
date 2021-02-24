@@ -16,6 +16,7 @@ caused the inability to interact with the chart.
 
 const Chart = ({ coin }) => {
 
+    const [chartData, setChartData] = useState({})
 
     const getDays = (time) => {
 
@@ -28,13 +29,12 @@ const Chart = ({ coin }) => {
         return formattedDates
     }
 
-    const [chartData, setChartData] = useState({})
-
     const chart = async (time) => {
 
         let priceArr = []
         let dateArr = []
         let days = getDays(time)
+
         for (let i = days.length - 1; i >= 0; i--) {
             let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${days[i]}`
             await axios.get(url)
@@ -44,6 +44,7 @@ const Chart = ({ coin }) => {
                     } else {
                         await dateArr.push(days[i])
                         await priceArr.push(res.data.market_data.current_price.usd)
+                        console.log('loading at ' + i)
                     }
 
                 }).then(() => {
@@ -61,28 +62,26 @@ const Chart = ({ coin }) => {
                         })
                     }
 
-                })
-
-                .catch((err) => console.log(err))
+                }).catch((err) => console.log(err))
         }
 
     }
 
 
     useEffect(() => {
-        chart(30)
+        chart(10)
     }, [])
 
 
     return (
         <div>
-            <button onClick={() => chart(15)}>Last 15 days</button>
-            <button onClick={() => chart(30)}>Last 30 days</button>
-            <button onClick={() => chart(60)}>Last 60 days</button>
+            <button onClick={() => chart(15)} disabled={true}>Last 15 days</button>
+            <button onClick={() => chart(30)} disabled={true}>Last 30 days</button>
+            <button onClick={() => chart(60)} disabled={true}>Last 60 days</button>
             <Line
                 data={chartData} options={{
                     responsive: true,
-                    title: { text: 'Price - Last 30 Days', display: true },
+                    title: { text: `Price - Last 10 Days`, display: true },
                     elements: {
                         line: {
                             tension: 0
@@ -92,7 +91,7 @@ const Chart = ({ coin }) => {
 
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: false
                             }
 
                         }]
