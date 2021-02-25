@@ -6,11 +6,10 @@ import { makeStyles, Paper, Grid } from '@material-ui/core'
 
 
 const useStyles = makeStyles(theme => ({
-    results: {
-        position: 'fixed'
-
-
-
+    gridContainer: {
+        position: 'absolute',
+        zIndex: '1000',
+        backgroundColor: 'white'
     }
 }))
 
@@ -56,9 +55,9 @@ const SearchCoins = () => {
             />
 
             {results && (
-                <Paper elevation={3} >
+                <Paper elevation={3}>
 
-                    <Grid container direction='column'>
+                    <Grid container className={classes.gridContainer} direction='column'>
                         {results.map((coin) => (
                             <Grid item key={coin.coin.id}>
                                 <SearchCoinResults coinSearch={coin} className={classes.input} />
