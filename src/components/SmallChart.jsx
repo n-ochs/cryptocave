@@ -43,7 +43,7 @@ const SmallChart = ({ coin, price }) => {
     }
 
     useEffect(() => {
-        chart(2, 'hourly')
+        chart(1, 'minute')
     }, [])
 
 

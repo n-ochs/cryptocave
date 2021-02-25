@@ -31,7 +31,7 @@ const CoinList = () => {
                             <Grid item sm={1}>Price Change% (24h)</Grid>
                             <Grid item sm={1}>Total Volume</Grid>
                             <Grid item sm={1}>Market Cap</Grid>
-                            <Grid item sm={1}>Last 7 Days</Grid>
+                            <Grid item sm={1}>Last 24h</Grid>
                         </Grid>
                     </Paper>
                     {coins.map((coin) => (
