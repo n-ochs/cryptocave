@@ -2,10 +2,21 @@ import React, { useState, useEffect } from 'react'
 import SearchCoinResults from './SearchCoinResults'
 import { Filters } from './methods/Filters.js'
 import { Data } from './methods/DataAPIs'
+import { makeStyles, Paper, Grid } from '@material-ui/core'
 
+
+const useStyles = makeStyles(theme => ({
+    results: {
+        position: 'fixed'
+
+
+
+    }
+}))
 
 const SearchCoins = () => {
 
+    const classes = useStyles()
     const [query, setQuery] = useState('')
     const [results, setResults] = useState([])
 
@@ -34,26 +45,30 @@ const SearchCoins = () => {
     }, [query])
 
     return (
-        <div>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Search Coins"
-                    value={query}
-                    onChange={onChange}
-                />
-            </div>
+        <>
+
+            <input
+                type="text"
+                placeholder="Search Coins"
+                value={query}
+                onChange={onChange}
+
+            />
+
             {results && (
-                <ul>
-                    {results.map((coin) => (
-                        <li
-                            key={coin.coin.id}>
-                            <SearchCoinResults coinSearch={coin} />
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+                <Paper elevation={3} >
+
+                    <Grid container direction='column'>
+                        {results.map((coin) => (
+                            <Grid item key={coin.coin.id}>
+                                <SearchCoinResults coinSearch={coin} className={classes.input} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Paper>
+            )
+            }
+        </>
     )
 }
 

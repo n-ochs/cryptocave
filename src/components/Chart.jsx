@@ -4,9 +4,6 @@ import axios from 'axios'
 import 'chartjs-plugin-crosshair'
 
 
-
-
-
 const Chart = ({ coin }) => {
 
     const [chartData, setChartData] = useState({})
@@ -33,6 +30,8 @@ const Chart = ({ coin }) => {
                         {
                             label: [],
                             pointHitRadius: 20,
+                            pointHoverRadius: 20,
+
                             data: priceArr,
                             backgroundColor: [
                                 'rgba(75, 192, 192, 0.6)'
@@ -52,12 +51,18 @@ const Chart = ({ coin }) => {
     return (
         <div>
             <button onClick={() => chart(2, 'hourly')} >Hourly (24h)</button>
+            <button onClick={() => chart(7, 'daily')} >Daily (7)</button>
+            <button onClick={() => chart(14, 'daily')} >Daily (14)</button>
             <button onClick={() => chart(30, 'daily')} >Daily (30)</button>
+            <button onClick={() => chart(60, 'daily')} >Daily (60)</button>
             <button onClick={() => chart(120, 'daily')} >Daily (120)</button>
             <Line
                 data={chartData} options={{
                     plugins: {
                         crosshair: {
+                            zoom: {
+                                enabled: false
+                            },
                             line: {
                                 color: '#F66',
                                 width: 1

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Data } from '../components/methods/DataAPIs'
 import { Link } from 'react-router-dom'
+import SearchCoins from '../components/SearchCoins'
 
 
 const CoinList = ({ match }) => {
@@ -14,7 +15,8 @@ const CoinList = ({ match }) => {
 
 
     return (
-        <div>
+        <>
+            <SearchCoins />
             {coins && (
                 <ul>
                     {coins.map((coin) => (
@@ -26,7 +28,7 @@ const CoinList = ({ match }) => {
                     ))}
                 </ul>
             )}
-        </div>
+        </>
     )
 }
 
