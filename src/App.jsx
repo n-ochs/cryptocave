@@ -30,7 +30,6 @@ function App() {
                     <Route path="/activation" component={Activation} />
                     <Route path="/profile" component={Profile} />
                     <Route path="/coinlist" component={CoinList} />
-                    <Route path="/alerts" component={Alerts} />
                     <Route path="/coins/:id" component={Coin} />
                 </Switch>
             </BrowserRouter>
