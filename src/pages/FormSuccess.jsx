@@ -4,7 +4,7 @@ function FormSuccess() {
     return (
         <div>
             <div>
-                Thank you for signing up to Crypto Cave!
+                Thank you for signing up to Crypto Cave! Redirecting you home...
             </div>
         </div>
     );
