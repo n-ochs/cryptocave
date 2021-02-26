@@ -1,94 +1,102 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import axios from 'axios'
-import moment from 'moment'
-
-
-
-
-/*
-
-commented out line 6846 in node_modules > chart.js > dist > chart.js to fix issue this however 
-caused the inability to interact with the chart. 
-
-*/
+import 'chartjs-plugin-crosshair'
 
 
 const Chart = ({ coin }) => {
 
     const [chartData, setChartData] = useState({})
 
-    const getDays = (time) => {
-
-        const formattedDates = []
-        const lastNthDays = [...new Array(time)].map((i, idx) => moment().startOf("day").subtract(idx, "days").format('L'));
-        const splitDate = lastNthDays.map((day) => day.split('/'))
-        for (const day of splitDate) {
-            formattedDates.push(`${day[1]}-${day[0]}-${day[2]}`)
-        }
-        return formattedDates
-    }
-
-    const chart = async (time) => {
-
+    const chart = async (days, interval) => {
         let priceArr = []
         let dateArr = []
-        let days = getDays(time)
+        let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=usd&days=${days}&interval=${interval}`
+        await axios.get(url)
+            .then(async res => {
 
-        for (let i = days.length - 1; i >= 0; i--) {
-            let url = `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${days[i]}`
-            await axios.get(url)
-                .then(async res => {
-                    if (!res.data.market_data) {
-                        console.log('not finding data')
-                    } else {
-                        await dateArr.push(days[i])
-                        await priceArr.push(res.data.market_data.current_price.usd)
-                        console.log('loading at ' + i)
-                    }
+                await res.data.prices.forEach((day) => priceArr.push(day[1]))
+                await res.data.prices.forEach((day) => {
+                    const milliseconds = day[0]
+                    const dateObject = new Date(milliseconds)
+                    dateArr.push(dateObject.toLocaleString())
+                })
 
-                }).then(() => {
-                    if (dateArr.length === days.length) {
-                        setChartData({
-                            labels: dateArr,
-                            datasets: [
-                                {
-                                    label: [],
-                                    data: priceArr,
-                                    backgroundColor: [
-                                        'rgba(75, 192, 192, 0.6)'
-                                    ]
-                                }]
-                        })
-                    }
+            }).then(() => {
 
-                }).catch((err) => console.log(err))
-        }
+                setChartData({
+                    labels: dateArr,
+                    datasets: [
+                        {
+                            label: [],
+                            pointHitRadius: 20,
+                            pointHoverRadius: 20,
 
+                            data: priceArr,
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.6)'
+                            ]
+                        }]
+                })
+
+
+            }).catch((err) => console.log(err))
     }
 
-
     useEffect(() => {
-        chart(10)
+        chart(2, 'hourly')
     }, [])
 
 
     return (
         <div>
-            <button onClick={() => chart(15)} disabled={true}>Last 15 days</button>
-            <button onClick={() => chart(30)} disabled={true}>Last 30 days</button>
-            <button onClick={() => chart(60)} disabled={true}>Last 60 days</button>
+            <button onClick={() => chart(2, 'hourly')} >Hourly (24h)</button>
+            <button onClick={() => chart(7, 'daily')} >Daily (7)</button>
+            <button onClick={() => chart(14, 'daily')} >Daily (14)</button>
+            <button onClick={() => chart(30, 'daily')} >Daily (30)</button>
+            <button onClick={() => chart(60, 'daily')} >Daily (60)</button>
+            <button onClick={() => chart(120, 'daily')} >Daily (120)</button>
             <Line
                 data={chartData} options={{
+                    plugins: {
+                        crosshair: {
+                            zoom: {
+                                enabled: false
+                            },
+                            line: {
+                                color: '#F66',
+                                width: 1
+                            },
+                            sync: {
+                                enabled: true,
+                                group: 1,
+                                suppressTooltips: false
+                            },
+                            callbacks: {
+                                beforeZoom: function (start, end) {
+                                    return true;
+                                },
+                                afterZoom: function (start, end) {
+                                }
+                            }
+                        }
+                    },
                     responsive: true,
-                    title: { text: `Price - Last 10 Days`, display: true },
+                    title: { text: `${coin.id.toUpperCase()}`, display: true },
                     elements: {
                         line: {
                             tension: 0
+                        },
+                        point: {
+                            radius: 0
                         }
                     },
                     scales: {
-
+                        xAxes: [{
+                            ticks: {
+                                display: false
+                            }
+                        }],
                         yAxes: [{
                             ticks: {
                                 beginAtZero: false
@@ -103,3 +111,5 @@ const Chart = ({ coin }) => {
 }
 
 export default Chart
+
+

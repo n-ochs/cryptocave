@@ -9,14 +9,13 @@ import Profile from './pages/Profile'
 import Form from './components/Form'
 import Coin from './pages/Coin'
 import CoinList from './pages/CoinList'
-import Alerts from './components/Alerts'
 import { GlobalProvider } from './context/GlobalState'
+import { ThemeProvider, CssBaseline } from '@material-ui/core'
+import theme from './components/ui/Themes'
 import Login from './pages/FormLogin'
 import Activation from './components/Activation';
 
 function App() {
-
-
     return (
         <GlobalProvider>
             <BrowserRouter>
@@ -31,12 +30,12 @@ function App() {
                     <Route path="/activation" component={Activation} />
                     <Route path="/profile" component={Profile} />
                     <Route path="/coinlist" component={CoinList} />
-                    <Route path="/alerts" component={Alerts} />
                     <Route path="/coins/:id" component={Coin} />
                 </Switch>
             </BrowserRouter>
+          <CssBaseline />
         </GlobalProvider>
     );
 };
 
-export default App
+export default App;
