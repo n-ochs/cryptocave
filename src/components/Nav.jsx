@@ -14,6 +14,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import HomeIcon from '@material-ui/icons/Home';
 import { withRouter } from 'react-router-dom';
+import SearchCoins from './SearchCoins'
 
 const drawerWidth = 240;
 
@@ -151,6 +152,7 @@ const Nav = (props) => {
                 })}
             >
                 <Toolbar>
+
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -163,6 +165,7 @@ const Nav = (props) => {
                     <Typography variant="h6" noWrap>
                         Crypto Cave
                     </Typography>
+                    <SearchCoins />
                 </Toolbar>
             </AppBar>
             <Drawer

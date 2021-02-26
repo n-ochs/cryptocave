@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import SearchCoinResults from './SearchCoinResults'
 import { Filters } from './methods/Filters.js'
 import { Data } from './methods/DataAPIs'
-import { makeStyles, Paper, Grid } from '@material-ui/core'
+import { makeStyles, Paper, Grid, Input } from '@material-ui/core'
 
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
         position: 'absolute',
         zIndex: '1000',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        border: '1px solid grey',
+        left: '79%',
+        top: '50px'
+
     }
 }))
 
@@ -46,18 +50,18 @@ const SearchCoins = () => {
     return (
         <>
 
-            <input
-                type="text"
-                placeholder="Search Coins"
+            <Input
+                style={{ marginLeft: 'auto', backgroundColor: 'white', borderRadius: 3, width: '20%' }}
+                placeholder="Search currencies"
+                color="secondary"
                 value={query}
                 onChange={onChange}
-
             />
 
             {results && (
                 <Paper elevation={3}>
 
-                    <Grid container className={classes.gridContainer} direction='column'>
+                    <Grid container className={classes.gridContainer} direction='column' sm={3}>
                         {results.map((coin) => (
                             <Grid item key={coin.coin.id}>
                                 <SearchCoinResults coinSearch={coin} className={classes.input} />
@@ -65,8 +69,8 @@ const SearchCoins = () => {
                         ))}
                     </Grid>
                 </Paper>
-            )
-            }
+            )}
+
         </>
     )
 }

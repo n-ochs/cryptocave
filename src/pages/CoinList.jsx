@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Data } from '../components/methods/DataAPIs'
 import { Link } from 'react-router-dom'
-import SearchCoins from '../components/SearchCoins'
-import { Paper, Grid } from '@material-ui/core'
+import { Paper, Grid, Typography, CssBaseline } from '@material-ui/core'
 import SmallChart from '../components/SmallChart'
 
 
@@ -13,30 +12,52 @@ const CoinList = () => {
     useEffect(async () => {
         const res = await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false`)
         setCoins(res)
-        console.log(coins)
     }, [])
 
 
     return (
         <>
-            <SearchCoins />
             {coins && (
-                <Paper>
+                <Paper style={{ width: '100%' }}>
                     <Paper>
-                        <Grid container>
-                            <Grid item sm={1}>Rank</Grid>
-                            <Grid item sm={1}>Name</Grid>
-                            <Grid item sm={1}>Symbol</Grid>
-                            <Grid item sm={1}>Price</Grid>
-                            <Grid item sm={1}>Price Change% (24h)</Grid>
-                            <Grid item sm={1}>Total Volume</Grid>
-                            <Grid item sm={1}>Market Cap</Grid>
-                            <Grid item sm={1}>Last 24h</Grid>
+                        <Grid container
+                            salignItems="center"
+                            justify="center"
+                            spacing={4}
+                        >
+
+                            <Grid item sm={1}>
+                                <Typography variant="h6">Rank</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6">Name</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6"> Symbol</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6">Price</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6">24h %</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6">Total Vol</Typography>
+                            </Grid>
+                            <Grid item sm={1}>
+                                <Typography variant="h6">Mkt Cap</Typography>
+                            </Grid>
+                            <Grid item sm={2}>
+                                <Typography variant="h6">Last 24h</Typography>
+                            </Grid>
                         </Grid>
                     </Paper>
                     {coins.map((coin) => (
                         <Paper key={coin.name}>
-                            <Grid container component={Link} to={`/coins/${coin.id}`}>
+                            <Grid container component={Link} to={`/coins/${coin.id}`}
+                                alignItems="center"
+                                justify="center"
+                                spacing={4}>
                                 <Grid item sm={1}>
                                     {coin.market_cap_rank}
                                 </Grid>
@@ -47,10 +68,10 @@ const CoinList = () => {
                                     {coin.symbol.toUpperCase()}
                                 </Grid>
                                 <Grid item sm={1}>
-                                    {coin.current_price}
+                                    {coin.current_price.toFixed(2)}
                                 </Grid>
                                 <Grid item sm={1}>
-                                    {coin.price_change_24h}
+                                    {coin.price_change_24h.toFixed(2)}
                                 </Grid>
                                 <Grid item sm={1}>
                                     {coin.total_volume}
@@ -58,7 +79,7 @@ const CoinList = () => {
                                 <Grid item sm={1}>
                                     {coin.market_cap}
                                 </Grid>
-                                <Grid item sm={1}>
+                                <Grid item sm={2}>
                                     <div style={{ width: '15rem', height: '3rem' }}>
                                         <SmallChart coin={coin} price={coin.price_change_24h} />
                                     </div>

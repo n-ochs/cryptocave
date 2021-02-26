@@ -1,11 +1,12 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 function Home() {
 
     return (
         <>
-            fuck you
+            <Button component={Link} to='/signup'>sign up</Button>
             <Typography>
 
                 What is Lorem Ipsum?
