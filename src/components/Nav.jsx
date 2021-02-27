@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-    Drawer, AppBar, Toolbar, List, ListItem, ListItemIcon, ListItemText, IconButton, Divider, Typography, Link
+    Drawer, AppBar, Toolbar, List, ListItem, ListItemIcon, ListItemText, IconButton, Divider, Typography, Link, CssBaseline
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -15,20 +14,27 @@ import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import HomeIcon from '@material-ui/icons/Home';
 import { withRouter } from 'react-router-dom';
 import SearchCoins from './SearchCoins'
+import SortIcon from '@material-ui/icons/Sort';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%'
     },
     appBar: {
+        background: 'none',
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
+
         }),
     },
     appBarShift: {
+
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
         transition: theme.transitions.create(['margin', 'width'], {
@@ -37,9 +43,11 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     menuButton: {
+
         marginRight: theme.spacing(2),
     },
     hide: {
+
         display: 'none',
     },
     drawer: {
@@ -47,19 +55,20 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     drawerPaper: {
+
         width: drawerWidth,
     },
     drawerHeader: {
+
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
     content: {
+
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(0),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -73,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: 0,
     },
+
+
 }));
 
 const Nav = (props) => {
@@ -143,16 +154,15 @@ const Nav = (props) => {
     ]
 
     return (
-        <div className={classes.root}>
 
+        <div className={classes.root}>
             <AppBar
-                position="fixed"
+                elevation={0}
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
             >
                 <Toolbar>
-
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -160,14 +170,17 @@ const Nav = (props) => {
                         edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
-                        <MenuIcon />
+                        <SortIcon fontSize='large' />
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Crypto Cave
                     </Typography>
+
                     <SearchCoins />
+
                 </Toolbar>
             </AppBar>
+
             <Drawer
                 className={classes.drawer}
                 variant="persistent"

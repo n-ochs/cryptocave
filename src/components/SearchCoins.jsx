@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import SearchCoinResults from './SearchCoinResults'
 import { Filters } from './methods/Filters.js'
 import { Data } from './methods/DataAPIs'
-import { makeStyles, Paper, Grid, Input } from '@material-ui/core'
+import { makeStyles, Paper, Grid, Input, fade, Box } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search';
 
 
 const useStyles = makeStyles(theme => ({
@@ -10,9 +11,26 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         zIndex: '1000',
         backgroundColor: 'white',
-        border: '1px solid grey',
         left: '79%',
-        top: '50px'
+        top: '50px',
+
+    },
+    searchbar: {
+        marginLeft: 'auto',
+        color: 'white',
+
+        padding: theme.spacing(1),
+        borderRadius: theme.shape.borderRadius,
+        transition: "transform 0.15s ease-in-out",
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.45),
+            transform: "scale3d(1.09, 1.09, 1)"
+        },
+        '& .MuiSvgIcon-root': {
+            marginRight: theme.spacing(1)
+        },
+
 
     }
 }))
@@ -49,26 +67,24 @@ const SearchCoins = () => {
 
     return (
         <>
-
             <Input
-                style={{ marginLeft: 'auto', backgroundColor: 'white', borderRadius: 3, width: '20%' }}
                 placeholder="Search currencies"
                 color="secondary"
                 value={query}
                 onChange={onChange}
+                className={classes.searchbar}
+                startAdornment={<SearchIcon />}
             />
 
             {results && (
-                <Paper elevation={3}>
 
-                    <Grid container className={classes.gridContainer} direction='column' sm={3}>
-                        {results.map((coin) => (
-                            <Grid item key={coin.coin.id}>
-                                <SearchCoinResults coinSearch={coin} className={classes.input} />
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Paper>
+                <Grid container className={classes.gridContainer} direction='column'>
+                    {results.map((coin) => (
+                        <Grid item key={coin.coin.id}>
+                            <SearchCoinResults coinSearch={coin} className={classes.input} />
+                        </Grid>
+                    ))}
+                </Grid>
             )}
 
         </>

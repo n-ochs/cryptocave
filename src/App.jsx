@@ -17,6 +17,8 @@ import Activation from './components/Activation';
 
 function App() {
     return (
+
+       <ThemeProvider theme={theme}>
         <GlobalProvider>
             <BrowserRouter>
                 <Nav />
@@ -35,6 +37,8 @@ function App() {
             </BrowserRouter>
           <CssBaseline />
         </GlobalProvider>
+       </ThemeProvider>
+
     );
 };
 

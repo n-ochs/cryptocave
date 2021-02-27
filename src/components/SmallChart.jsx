@@ -35,6 +35,7 @@ const SmallChart = ({ coin, price }) => {
                             data: priceArr,
                             backgroundColor: ['transparent'],
                             borderColor: `${lineColor}`,
+                            borderWidth: 3
                         }]
                 })
 

@@ -44,7 +44,7 @@ const Chart = ({ coin }) => {
     }
 
     useEffect(() => {
-        chart(2, 'hourly')
+        chart(120, 'daily')
     }, [])
 
 
@@ -56,6 +56,8 @@ const Chart = ({ coin }) => {
             <button onClick={() => chart(30, 'daily')} >Daily (30)</button>
             <button onClick={() => chart(60, 'daily')} >Daily (60)</button>
             <button onClick={() => chart(120, 'daily')} >Daily (120)</button>
+            <button onClick={() => chart(365, 'daily')} >Daily (YR)</button>
+
             <Line
                 data={chartData} options={{
                     plugins: {
