@@ -47,8 +47,8 @@ export default function CardFeature({ content, checked }) {
                         {content.title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" className={classes.desc}>
-                        content.desc
-                </Typography>
+                        {content.desc}
+                    </Typography>
                 </CardContent>
             </Card>
         </Collapse>
