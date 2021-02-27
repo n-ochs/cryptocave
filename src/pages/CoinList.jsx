@@ -9,8 +9,14 @@ import { makeStyles } from '@material-ui/core/styles'
 
 
 const useStyles = makeStyles(theme => ({
+    root: {
+
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: theme.spacing(10)
+    },
     tableContainer: {
-        width: '100%',
+        minWidth: '85rem',
         marginTop: theme.spacing(3),
         '& thead th': {
             color: 'white',
@@ -60,9 +66,9 @@ const CoinList = (props) => {
     const { onSelectAllClick, numSelected, rowCount } = props;
 
     return (
-        <>
-            <Typography variant='h3' style={{ 'text-align': "center" }}>Top Cryptocurrencies</Typography>
-            <Paper>
+        <div className={classes.root}>
+            <Paper className={classes.test}>
+                <Typography variant='h3' style={{ 'font-weight': 'bold' }}>Top Cryptocurrencies</Typography>
                 <Table className={classes.tableContainer}>
                     <TableHead>
                         <TableRow>
@@ -111,7 +117,7 @@ const CoinList = (props) => {
                 )}
 
             </Paper>
-        </>
+        </div>
     )
 }
 
