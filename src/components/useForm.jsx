@@ -31,7 +31,7 @@ const useForm = (callback, validate) => {
     useEffect(() => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
             callback();
-            createUser(values.email, values.password);
+            createUser(values.username, values.email, values.password);
         };
     }, [errors]);
 
