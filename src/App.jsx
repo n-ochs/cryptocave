@@ -16,24 +16,28 @@ import theme from './components/ui/Themes'
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <GlobalProvider>
-                <BrowserRouter>
-                    <Nav />
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/newslist" component={NewsList} />
-                        <Route path="/watchlist" component={WatchList} />
-                        <Route path="/portfolio" component={Portfolio} />
-                        <Route path="/signup" component={Form} />
-                        <Route path="/profile" component={Profile} />
-                        <Route path="/coinlist" component={CoinList} />
-                        <Route path="/coins/:id" component={Coin} />
-                    </Switch>
-                </BrowserRouter>
-            </GlobalProvider>
+        <>
             <CssBaseline />
-        </ThemeProvider>
+            <ThemeProvider theme={theme}>
+
+                <GlobalProvider>
+                    <BrowserRouter>
+                        <Nav />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/newslist" component={NewsList} />
+                            <Route path="/watchlist" component={WatchList} />
+                            <Route path="/portfolio" component={Portfolio} />
+                            <Route path="/signup" component={Form} />
+                            <Route path="/profile" component={Profile} />
+                            <Route path="/coinlist" component={CoinList} />
+                            <Route path="/coins/:id" component={Coin} />
+                        </Switch>
+                    </BrowserRouter>
+                </GlobalProvider>
+
+            </ThemeProvider>
+        </>
     );
 };
 
