@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { login } from '../components/methods/BackendConnection';
+import { login } from '../components/methods/BackendConnection/Auth';
 
 const FormLogin = () => {
 

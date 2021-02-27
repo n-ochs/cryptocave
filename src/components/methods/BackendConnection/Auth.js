@@ -16,7 +16,7 @@ export const createUser = async (username, email, password) => {
     .catch(() => {
         window.location.href = `${appUrl}/SignUp`;
         alert('Account registration failed. Please try again.');
-    })
+    });
 };
 
 export const login = async (email, password) => {

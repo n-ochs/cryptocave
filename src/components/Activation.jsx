@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { verification } from './methods/BackendConnection';
+import { verification } from './methods/BackendConnection/Auth';
 
 const Activation = () => {
 

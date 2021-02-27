@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createUser } from '../components/methods/BackendConnection';
+import { createUser } from './methods/BackendConnection/Auth';
 
 const useForm = (callback, validate) => {
 
