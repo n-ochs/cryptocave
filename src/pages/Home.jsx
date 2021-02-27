@@ -1,8 +1,9 @@
 import React from 'react'
 import { Typography, Button, makeStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Hero from '../components/Hero'
-import Colors from '../components/Colors'
+import Hero from '../components/HomeComponents/Hero'
+import Colors from '../components/HomeComponents/Colors'
+import Features from '../components/HomeComponents/Features'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,10 +14,13 @@ const useStyles = makeStyles(theme => ({
 
 function Home() {
 
+    const classes = useStyles()
+
     return (
-        <>
+        <div className={classes.root}>
             <Hero />
-        </>
+            <Features />
+        </div>
     )
 }
 
