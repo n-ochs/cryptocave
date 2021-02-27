@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const appUrl = "https://cryptocave.netlify.app";
 
+//Signup
 export const createUser = async (username, email, password) => {
     await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/signup`, {
         username: username,
@@ -19,6 +20,7 @@ export const createUser = async (username, email, password) => {
     });
 };
 
+//Login
 export const login = async (email, password) => {
     await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/login`, {
         email: email,
@@ -27,7 +29,7 @@ export const login = async (email, password) => {
     .then((res) => {
         if (res.data.token) {
             axios.defaults.headers.common['Authorization'] = res.data.token;
-            window.location.href = appUrl;
+            window.location.href = 'localhost:3000/'; //change back to appUrl
         };
     })
     .catch((err) => {
@@ -36,9 +38,11 @@ export const login = async (email, password) => {
     });
 };
 
+//Email Verification
 export const verification = async (email, verificationCode) => {
     await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/activate`, {
         email: email,
         verificationCode: verificationCode
-    });
+    }); 
+    //add .then and .catch
 };
