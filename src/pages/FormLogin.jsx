@@ -1,7 +1,7 @@
-import { Avatar, Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Avatar, Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from '../components/methods/BackendConnection/Auth';
 
 const FormLogin = () => {
@@ -25,7 +25,7 @@ const FormLogin = () => {
         login(email, password);
     };
 
-    const paperStyle={padding: 60, height: '30vh', width: 500, margin: 'auto auto', border: "5px solid #05f4b7"};
+    const paperStyle={padding: 60, height: 'auto', width: 500, margin: 'auto auto', border: "5px solid #05f4b7"};
     const avatarStyle={backgroundColor: 'grey'};
     const buttonStyle={margin: '10px 0'};
     const theme={backgroundColor: '#12151f', height: '100vh'};
@@ -37,9 +37,13 @@ const FormLogin = () => {
                         <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>
                         <Typography>Sign In</Typography>
                     </Grid>
+
                     <TextField fullWidth required label='Email' placeholder='Email' id='email' type='email' name='email' value={values.email} onChange={handleChange} />
+
                     <TextField fullWidth required label='Password' placeholder='Password' id='password' type='password' name='password' value={values.password} onChange={handleChange} />
+
                     <Button fullWidth type='submit' color='primary' variant='contained' onClick={handleSubmit} style={buttonStyle}>Sign In</Button>
+
                     <Typography>
                         Don't have an account? <Link to="/signup">Sign up</Link>
                     </Typography>
