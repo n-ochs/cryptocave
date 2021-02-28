@@ -6,6 +6,8 @@ import SmallChart from '../components/SmallChart'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles'
+import { addToWatchlist, deleteFromWatchlist } from '../components/methods/BackendConnection/Watchlist'
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,34 +38,99 @@ const useStyles = makeStyles(theme => ({
 
         }
     }
-}))
-
+}));
 
 const CoinList = (props) => {
-
-
-
-    const classes = useStyles()
-    const [coins, setCoins] = useState(null)
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
+    const classes = useStyles();
+    const [coins, setCoins] = useState(null);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-    }
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10))
-        setPage(0)
-    }
+    };
 
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     useEffect(async () => {
-        const res = await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
-        setCoins(res)
+        await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
+        .then((res) => {
+            setCoins(res);
+            const defaultStars = [
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                ];
+            setStar(defaultStars);
+        })
+        .catch(() => {
+            console.log('error from API');
+        });
+    }, [page, rowsPerPage]);
 
-    }, [page, rowsPerPage])
+    //Pre-filling stars based on user's watchlist
+    // const [watchlist, setWatchlist] = useState(null)
+    // console.log(coins)
 
-    const { onSelectAllClick, numSelected, rowCount } = props;
+    // useEffect(async () => {
+    //     await axios.get(`${process.env.REACT_APP_BACKEND_CONNECTION}/wl/watchlist`)
+    //     .then((data) => {
+    //         setWatchlist(data.data)
+    //         console.log(watchlist)
+    //         let alreadyWatched = watchlist.map((coin) => {
+                
+    //         })
+    //     })
+    //     .catch(() => {
+    //         console.log('error')
+    //     })
+    // }, []);
+
+    // console.log(watchlist)
+
+    const [star, setStar] = useState([
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+    ]);
+
+    const toggleStar = (i, coin) => {
+        addToWatchlist(coin)
+        .then(() => {
+            let newStars = star.map((star, index) => {
+                if (i === index) {
+                    return {
+                        ...star,
+                        starFilled: !star.starFilled
+                    };
+                } else {
+                    return star;
+                };
+            });
+            setStar(newStars);
+        })
+        .catch(() => {
+            deleteFromWatchlist(coin)
+            let newStars = star.map((star, index) => {
+                if (i === index) {
+                    return {
+                        ...star,
+                        starFilled: !star.starFilled
+                    };
+                } else {
+                    return star;
+                };
+            });
+            setStar(newStars);
+        });
+    };
 
     return (
         <div className={classes.root}>
@@ -84,9 +151,13 @@ const CoinList = (props) => {
                     </TableHead>
                     <TableBody>
                         {coins && (
-                            coins.map((coin) => (
+                            coins.map((coin, i) => (
                                 <TableRow key={coin.id}>
-                                    <TableCell><StarBorderIcon /></TableCell>
+                                    <TableCell>
+                                        <button key={i} onClick={() => toggleStar(i, coin.symbol.toUpperCase())}>
+                                            {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
+                                        </button>
+                                        </TableCell>
                                     <TableCell>{coin.market_cap_rank}</TableCell>
                                     <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
                                     <TableCell>{coin.symbol.toUpperCase()}</TableCell>
@@ -118,10 +189,7 @@ const CoinList = (props) => {
 
             </Paper>
         </div>
-    )
-}
+    );
+};
 
-export default CoinList
-
-
-
+export default CoinList;
