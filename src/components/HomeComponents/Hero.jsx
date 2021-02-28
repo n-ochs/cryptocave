@@ -4,7 +4,7 @@ import { makeStyles, Box, Button, Typography, fade, IconButton, Collapse } from 
 import { Link } from 'react-router-dom'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
-
+import ScrollButton from './ScrollButton'
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -22,30 +22,35 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         color: '#fff',
-        fontSize: '4.5rem',
-        textAlign: 'center'
+        fontSize: '7.5rem',
+        textAlign: 'center',
 
     },
     btn: {
 
         transition: "transform 0.15s ease-in-out",
-        backgroundColor: fade(theme.palette.common.white, 0.1),
+        backgroundColor: fade('#dd3835', 0.5),
         '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.4),
-            transform: "scale3d(1.2, 1.2, 1)"
+            backgroundColor: fade('#dd3835', 0.9),
+            transform: "scale3d(1.1, 1.1, 1)"
         },
-        fontWeight: 'bold'
+        fontSize: '2.1rem',
+        color: 'white',
+
 
     },
     down: {
         color: '#fff',
-        fontSize: '4rem',
+        fontSize: '5rem',
+
     }
 }))
 
 const Hero = () => {
     const classes = useStyles()
     const [checked, setChecked] = useState(false)
+    const section = 'discover'
+
     useEffect(() => {
         setChecked(true)
     }, [])
@@ -61,17 +66,11 @@ const Hero = () => {
                         Welcome to <br /> The Crypto Cave
                 </Box>
                     <Box>
-                        <Button className={classes.btn} variant="outlined" color="secondary" size="large" component={Link} to={'/signup'}>
+                        <Button className={classes.btn} variant="filled" color="secondary" size="large" component={Link} to={'/signup'}>
                             Sign Up
                     </Button>
                     </Box>
-                    <Box>
-                        <Scroll to="features-section" smooth={true}>
-                            <IconButton >
-                                <ExpandMoreIcon className={classes.down} />
-                            </IconButton>
-                        </Scroll>
-                    </Box>
+                    <ScrollButton section={section} />
                 </Typography>
             </Collapse>
 

@@ -23,14 +23,15 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+
     },
     appBar: {
+        marginTop: theme.spacing(1),
         background: 'none',
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
-
         }),
     },
     appBarShift: {
@@ -172,8 +173,8 @@ const Nav = (props) => {
                     >
                         <SortIcon fontSize='large' />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Crypto Cave
+                    <Typography variant="h6" noWrap style={{ fontWeight: 'bold' }}>
+                        Crypto <span style={{ color: '#36d9df' }}>Cave</span>
                     </Typography>
 
                     <SearchCoins />

@@ -12,4 +12,15 @@ export default createMuiTheme({
     shape: {
         borderRadius: 8,
     },
+    palette: {
+        primary: {
+            main: '#12151f',
+
+
+        },
+        secondary: {
+            main: '#371bb1',
+            accent: '#05f4b7'
+        }
+    }
 })
