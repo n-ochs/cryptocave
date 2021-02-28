@@ -1,7 +1,5 @@
-import React from 'react'
-import { makeStyles, Grid, Grow, Box, IconButton } from '@material-ui/core'
-import CardFeature from './CardFeature'
-import { content } from './content'
+import React, { useState, useEffect } from 'react'
+import { makeStyles, Grid, Grow, Typography, Paper } from '@material-ui/core'
 import useWindowPosition from '../hooks/useWindowPosition'
 import ScrollButton from './ScrollButton'
 
@@ -9,51 +7,61 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
         width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        [theme.breakpoints.down('md')]: {
-            flexDirection: 'row'
-        }
+        alignItems: 'flex-end',
+
     },
-    wrapper: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
+    titleWrapper: {
+        marginRight: 'auto',
+        marginLeft: '2rem',
+        textAlign: 'left'
+
     },
+    titleText: {
+        color: '#fff',
+        fontSize: '6.5rem',
+    },
+    contentText: {
+        color: '#fff',
+        fontSize: '1.5rem',
+        marginLeft: '2rem',
+
+
+    },
+    down: {
+        textAlign: 'center',
+        margin: 'auto'
+    }
 
 }))
-function Expand() {
+
+function Discover() {
     const classes = useStyles()
 
     const checked = useWindowPosition('header')
 
-    const section = 'signup-section'
+    const section = 'signup'
 
 
     return (
 
-        <div className={classes.wrapper} id="expand">
-            <h1 style={{ color: 'white' }}>grow</h1>
-
-            <Grid container className={classes.root} id="expand-section">
-                <Grow in={checked} {...(checked ? { timeout: 2000 } : {})}>
-                    <Grid item xs={6}>
-                        <CardFeature content={content[0]} checked={checked} />
+        <Grid container id="expand" className={classes.root}>
+            <Grid item xs={12}></Grid>
+            <Grow in={checked} {...(checked ? { timeout: 2000 } : {})}>
+                <Paper style={{ backgroundColor: 'transparent' }}>
+                    <Grid item xs={4} className={classes.titleWrapper}>
+                        <Typography variant='h3' className={classes.titleText}>Grow Your Accounts</Typography>
                     </Grid>
-                </Grow>
-                <Grow in={checked} {...(checked ? { timeout: 4000 } : {})}>
-                    <Grid item xs={6}>
-                        <CardFeature content={content[1]} checked={checked} />
+                    <Grid item xs={4} checked={checked} className={classes.contentWrapper}>
+                        <Typography variant='subtitle1' className={classes.contentText}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, architecto voluptates esse tenetur recusandae voluptate quis reprehenderit, doloribus necessitatibus accusantium molestias perspiciatis. Nostrum aliquid saepe deserunt distinctio, nihil reiciendis beatae!</Typography>
                     </Grid>
-                </Grow>
+                </Paper>
+            </Grow>
+            <Grid item xs={12} className={classes.down}>
                 <ScrollButton section={section} />
             </Grid>
 
-
-        </div>
+        </Grid>
     )
 }
 
-export default Expand
+export default Discover
