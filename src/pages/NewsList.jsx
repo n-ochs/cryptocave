@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import NewsCard from './newsPageComponents/NewsCard'
+import NewsCard from '../components/newsPageComponents/NewsCard'
 import { makeStyles, Typography, Grid } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({

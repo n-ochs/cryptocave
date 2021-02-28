@@ -22,24 +22,29 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         color: '#fff',
-        fontSize: '4.5rem',
-        textAlign: 'center'
+        fontSize: '7.5rem',
+        textAlign: 'center',
+        marginTop: '15rem'
 
     },
     btn: {
 
         transition: "transform 0.15s ease-in-out",
-        backgroundColor: fade(theme.palette.common.white, 0.1),
+        backgroundColor: fade('#dd3835', 0.5),
         '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.4),
-            transform: "scale3d(1.2, 1.2, 1)"
+            backgroundColor: fade('#dd3835', 0.9),
+            transform: "scale3d(1.1, 1.1, 1)"
         },
-        fontWeight: 'bold'
+        fontSize: '2.1rem',
+        color: 'white',
+
 
     },
     down: {
         color: '#fff',
-        fontSize: '4rem',
+        fontSize: '5rem',
+        marginTop: '15rem'
+
     }
 }))
 
@@ -61,7 +66,7 @@ const Hero = () => {
                         Welcome to <br /> The Crypto Cave
                 </Box>
                     <Box>
-                        <Button className={classes.btn} variant="outlined" color="secondary" size="large" component={Link} to={'/signup'}>
+                        <Button className={classes.btn} variant="filled" color="secondary" size="large" component={Link} to={'/signup'}>
                             Sign Up
                     </Button>
                     </Box>
