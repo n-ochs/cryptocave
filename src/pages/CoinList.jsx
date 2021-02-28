@@ -112,7 +112,7 @@ const CoinList = (props) => {
                         {coins && (
                             coins.map((coin, i) => (
                                 <TableRow key={coin.id}>
-                                    <TableCell><button key={i} onClick={() => toggleStar(i)}>{star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}</button>{i}</TableCell>
+                                    <TableCell><button key={i} onClick={() => toggleStar(i)}>{star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}</button></TableCell>
                                     <TableCell>{coin.market_cap_rank}</TableCell>
                                     <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
                                     <TableCell>{coin.symbol.toUpperCase()}</TableCell>
