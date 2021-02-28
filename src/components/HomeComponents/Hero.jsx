@@ -4,7 +4,7 @@ import { makeStyles, Box, Button, Typography, fade, IconButton, Collapse } from 
 import { Link } from 'react-router-dom'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
-
+import ScrollButton from './ScrollButton'
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -49,6 +49,8 @@ const useStyles = makeStyles(theme => ({
 const Hero = () => {
     const classes = useStyles()
     const [checked, setChecked] = useState(false)
+    const section = 'discover'
+
     useEffect(() => {
         setChecked(true)
     }, [])
@@ -68,13 +70,7 @@ const Hero = () => {
                             Sign Up
                     </Button>
                     </Box>
-                    <Box>
-                        <Scroll to="features-section" smooth={true}>
-                            <IconButton >
-                                <ExpandMoreIcon className={classes.down} />
-                            </IconButton>
-                        </Scroll>
-                    </Box>
+                    <ScrollButton section={section} />
                 </Typography>
             </Collapse>
 

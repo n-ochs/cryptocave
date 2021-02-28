@@ -11,7 +11,6 @@ import CoinDesc from '../components/coinPageComponents/CoinDesc'
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: theme.palette.primary.main,
-
     },
     wrapper: {
         marginTop: theme.spacing(18),
@@ -20,12 +19,12 @@ const useStyles = makeStyles(theme => ({
         width: '95%',
         color: '#fff',
         backgroundColor: theme.palette.primary.main,
-        padding: theme.spacing(3)
-
+        padding: theme.spacing(3),
 
     },
     head: {
         padding: theme.spacing(2),
+
 
     },
     fund: {
