@@ -43,27 +43,53 @@ const CoinList = (props) => {
 
 
 
-    const classes = useStyles()
-    const [coins, setCoins] = useState(null)
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
+    const classes = useStyles();
+    const [coins, setCoins] = useState(null);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-    }
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10))
-        setPage(0)
-    }
+    };
 
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     useEffect(async () => {
-        const res = await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
-        setCoins(res)
-
-    }, [page, rowsPerPage])
+        await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
+        .then((res) => {
+            setCoins(res);
+        })
+        .catch(() => {
+            console.log('error from API');
+        });
+    }, [page, rowsPerPage]);
 
     const { onSelectAllClick, numSelected, rowCount } = props;
+
+    const [star, setStar] = useState([
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+        {starFilled: false},
+    ]);
+
+    const toggleStar = (i) => {
+        let newStars = star.map((star, index) => {
+            if (i === index) {
+                return {
+                    ...star,
+                    starFilled: !star.starFilled
+                };
+            } else {
+                return star;
+            };
+        });
+        setStar(newStars);
+    };
 
     return (
         <div className={classes.root}>
@@ -84,9 +110,9 @@ const CoinList = (props) => {
                     </TableHead>
                     <TableBody>
                         {coins && (
-                            coins.map((coin) => (
+                            coins.map((coin, i) => (
                                 <TableRow key={coin.id}>
-                                    <TableCell><StarBorderIcon /></TableCell>
+                                    <TableCell><button key={i} onClick={() => toggleStar(i)}>{star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}</button>{i}</TableCell>
                                     <TableCell>{coin.market_cap_rank}</TableCell>
                                     <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
                                     <TableCell>{coin.symbol.toUpperCase()}</TableCell>
