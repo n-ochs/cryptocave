@@ -59,12 +59,21 @@ const CoinList = (props) => {
         await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
         .then((res) => {
             setCoins(res);
+            const defaultStars = [
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                {starFilled: false},
+                ];
+            setStar(defaultStars);
         })
         .catch(() => {
             console.log('error from API');
         });
     }, [page, rowsPerPage]);
 
+    //Pre-filling stars based on user's watchlist
     // const [watchlist, setWatchlist] = useState(null)
     // console.log(coins)
 
