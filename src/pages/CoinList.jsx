@@ -6,6 +6,8 @@ import SmallChart from '../components/SmallChart'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles'
+import { addToWatchlist, deleteFromWatchlist } from '../components/methods/BackendConnection/Watchlist'
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,13 +38,9 @@ const useStyles = makeStyles(theme => ({
 
         }
     }
-}))
-
+}));
 
 const CoinList = (props) => {
-
-
-
     const classes = useStyles();
     const [coins, setCoins] = useState(null);
     const [page, setPage] = useState(0);
@@ -67,7 +65,24 @@ const CoinList = (props) => {
         });
     }, [page, rowsPerPage]);
 
-    const { onSelectAllClick, numSelected, rowCount } = props;
+    // const [watchlist, setWatchlist] = useState(null)
+    // console.log(coins)
+
+    // useEffect(async () => {
+    //     await axios.get(`${process.env.REACT_APP_BACKEND_CONNECTION}/wl/watchlist`)
+    //     .then((data) => {
+    //         setWatchlist(data.data)
+    //         console.log(watchlist)
+    //         let alreadyWatched = watchlist.map((coin) => {
+                
+    //         })
+    //     })
+    //     .catch(() => {
+    //         console.log('error')
+    //     })
+    // }, []);
+
+    // console.log(watchlist)
 
     const [star, setStar] = useState([
         {starFilled: false},
@@ -77,18 +92,35 @@ const CoinList = (props) => {
         {starFilled: false},
     ]);
 
-    const toggleStar = (i) => {
-        let newStars = star.map((star, index) => {
-            if (i === index) {
-                return {
-                    ...star,
-                    starFilled: !star.starFilled
+    const toggleStar = (i, coin) => {
+        addToWatchlist(coin)
+        .then(() => {
+            let newStars = star.map((star, index) => {
+                if (i === index) {
+                    return {
+                        ...star,
+                        starFilled: !star.starFilled
+                    };
+                } else {
+                    return star;
                 };
-            } else {
-                return star;
-            };
+            });
+            setStar(newStars);
+        })
+        .catch(() => {
+            deleteFromWatchlist(coin)
+            let newStars = star.map((star, index) => {
+                if (i === index) {
+                    return {
+                        ...star,
+                        starFilled: !star.starFilled
+                    };
+                } else {
+                    return star;
+                };
+            });
+            setStar(newStars);
         });
-        setStar(newStars);
     };
 
     return (
@@ -112,7 +144,11 @@ const CoinList = (props) => {
                         {coins && (
                             coins.map((coin, i) => (
                                 <TableRow key={coin.id}>
-                                    <TableCell><button key={i} onClick={() => toggleStar(i)}>{star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}</button></TableCell>
+                                    <TableCell>
+                                        <button key={i} onClick={() => toggleStar(i, coin.symbol.toUpperCase())}>
+                                            {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
+                                        </button>
+                                        </TableCell>
                                     <TableCell>{coin.market_cap_rank}</TableCell>
                                     <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
                                     <TableCell>{coin.symbol.toUpperCase()}</TableCell>
@@ -144,10 +180,7 @@ const CoinList = (props) => {
 
             </Paper>
         </div>
-    )
-}
+    );
+};
 
-export default CoinList
-
-
-
+export default CoinList;

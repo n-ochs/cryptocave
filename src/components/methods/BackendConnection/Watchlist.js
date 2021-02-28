@@ -25,11 +25,17 @@ export const createWatchlist = async () => {
 // };
 
 //Update
-export const addToWatchlist = async () => {
-    
+export const addToWatchlist = async (coin) => {
+    await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/wl/add`, {
+        newCoin: coin
+    });
 };
 
 //Delete
-export const deleteFromWatchlist = async () => {
-    
+export const deleteFromWatchlist = async (coin) => {
+    await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/wl/delete`, {
+        deletedCoin: coin
+    })
+    .then(() => console.log('success'))
+    .catch(() => console.log('error!!!'))
 };
