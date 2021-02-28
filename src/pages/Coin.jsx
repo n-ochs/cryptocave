@@ -66,24 +66,24 @@ const Coin = ({ match }) => {
         <Grid container className={classes.root} spacing={0}>
             {coin && (
                 <Grid container className={classes.wrapper}>
-                    <Grid container className={classes.head} xs={12} justify='flex-start'>
+                    <Grid container className={classes.head} md={12} justify='flex-start'>
                         <CoinHeader coin={coin} />
                     </Grid>
-                    <Grid container className={classes.social} xs={12}>
+                    <Grid container className={classes.social} md={12}>
                         <SocialStats coin={coin} />
                     </Grid>
-                    <Grid container className={classes.priceChart} xs={8}>
+                    <Grid container className={classes.priceChart} md={8} sm={12}>
                         <Chart coin={coin} />
                     </Grid>
-                    <Grid container className={classes.fund} xs={4}>
+                    <Grid container className={classes.fund} md={4} sm={12}>
                         <FundDash coin={coin} style={{ width: '100%' }} />
                     </Grid>
 
-                    <Grid container className={classes.desc} xs={6}>
+                    <Grid container className={classes.desc} md={6}>
                         <CoinDesc coin={coin} />
 
                     </Grid>
-                    <Grid container className={classes.newsFeed} xs={6}>
+                    <Grid container className={classes.newsFeed} md={6}>
                         <CoinNewsFeed coin={coin} />
                     </Grid>
 

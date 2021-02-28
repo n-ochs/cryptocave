@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
         fontSize: '7.5rem',
         textAlign: 'center',
-        marginTop: '15rem'
 
     },
     btn: {
@@ -43,7 +42,6 @@ const useStyles = makeStyles(theme => ({
     down: {
         color: '#fff',
         fontSize: '5rem',
-        marginTop: '15rem'
 
     }
 }))
