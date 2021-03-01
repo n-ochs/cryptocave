@@ -154,7 +154,7 @@ const CoinList = (props) => {
                             coins.map((coin, i) => (
                                 <TableRow key={coin.id}>
                                     <TableCell>
-                                        <button key={i} onClick={() => toggleStar(i, coin.symbol.toUpperCase())}>
+                                        <button key={i} onClick={() => toggleStar(i, coin.id)}>
                                             {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
                                         </button>
                                         </TableCell>
