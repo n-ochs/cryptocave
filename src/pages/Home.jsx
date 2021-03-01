@@ -21,15 +21,17 @@ function Home() {
     const classes = useStyles()
 
     return (
-
         <div className={classes.root}>
-            <Hero />
-            <Discover />
-            <Research />
-            <Expand />
-            <SignUpHome />
+            <div>
+                <Hero />
+            </div>
+            <div>
+                <Discover />
+                <Research />
+                <Expand />
+                <SignUpHome />
+            </div>
         </div>
-
     )
 }
 

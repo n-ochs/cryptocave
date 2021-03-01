@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import bitcoin from '../../videos/bitcoin.mp4'
-import { makeStyles, Box, Button, Typography, fade, IconButton, Collapse } from '@material-ui/core'
+import { makeStyles, Box, Button, Typography, fade, IconButton, Collapse, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     wrapper: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         height: '100vh',
     },
     videoTag: {
@@ -26,23 +26,10 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
 
     },
-    btn: {
 
-        transition: "transform 0.15s ease-in-out",
-        backgroundColor: fade('#dd3835', 0.5),
-        '&:hover': {
-            backgroundColor: fade('#dd3835', 0.9),
-            transform: "scale3d(1.1, 1.1, 1)"
-        },
-        fontSize: '2.1rem',
-        color: 'white',
-
-
-    },
     down: {
-        color: '#fff',
-        fontSize: '5rem',
-
+        textAlign: 'center',
+        margin: 'auto',
     }
 }))
 
@@ -56,25 +43,24 @@ const Hero = () => {
     }, [])
 
     return (
-        <div className={classes.wrapper} id="header">
+        <Grid container className={classes.wrapper} id="header">
             <video autoPlay loop muted className={classes.videoTag}>
                 <source src={bitcoin} type='video/mp4' />
             </video>
             <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})} collapsedHeight={0}>
-                <Typography variant='h2' className={classes.title}>
-                    <Box fontWeight="fontWeightBold">
-                        Welcome to <br /> The Crypto Cave
-                </Box>
-                    <Box>
-                        <Button className={classes.btn} variant="filled" color="secondary" size="large" component={Link} to={'/signup'}>
-                            Sign Up
-                    </Button>
-                    </Box>
-                    <ScrollButton section={section} />
-                </Typography>
-            </Collapse>
+                <Grid item xs={12}>
+                    <Typography variant='h2' className={classes.title}>
+                        <Box fontWeight="fontWeightBold">
+                            Welcome to <br /> The Crypto Cave
+                        </Box>
+                    </Typography>
+                </Grid>
 
-        </div>
+            </Collapse>
+            <Grid item xs={12} className={classes.down}>
+                <ScrollButton section={section} />
+            </Grid>
+        </Grid>
     )
 }
 

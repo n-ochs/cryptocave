@@ -15,8 +15,7 @@ export default createMuiTheme({
     palette: {
         primary: {
             main: '#12151f',
-
-
+            accent: '#36d9df'
         },
         secondary: {
             main: '#371bb1',
