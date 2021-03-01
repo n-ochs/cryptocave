@@ -8,6 +8,7 @@ import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles'
 import { addToWatchlist, deleteFromWatchlist } from '../components/methods/BackendConnection/Watchlist'
 import axios from 'axios';
+import NewsCard from '../components/newsPageComponents/NewsCard'
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,20 +58,20 @@ const CoinList = (props) => {
 
     useEffect(async () => {
         await Data.getCoins(`coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page + 1}&sparkline=false`)
-        .then((res) => {
-            setCoins(res);
-            const defaultStars = [
-                {starFilled: false},
-                {starFilled: false},
-                {starFilled: false},
-                {starFilled: false},
-                {starFilled: false},
+            .then((res) => {
+                setCoins(res);
+                const defaultStars = [
+                    { starFilled: false },
+                    { starFilled: false },
+                    { starFilled: false },
+                    { starFilled: false },
+                    { starFilled: false },
                 ];
-            setStar(defaultStars);
-        })
-        .catch(() => {
-            console.log('error from API');
-        });
+                setStar(defaultStars);
+            })
+            .catch(() => {
+                console.log('error from API');
+            });
     }, [page, rowsPerPage]);
 
     //Pre-filling stars based on user's watchlist
@@ -83,7 +84,7 @@ const CoinList = (props) => {
     //         setWatchlist(data.data)
     //         console.log(watchlist)
     //         let alreadyWatched = watchlist.map((coin) => {
-                
+
     //         })
     //     })
     //     .catch(() => {
@@ -94,48 +95,49 @@ const CoinList = (props) => {
     // console.log(watchlist)
 
     const [star, setStar] = useState([
-        {starFilled: false},
-        {starFilled: false},
-        {starFilled: false},
-        {starFilled: false},
-        {starFilled: false},
+        { starFilled: false },
+        { starFilled: false },
+        { starFilled: false },
+        { starFilled: false },
+        { starFilled: false },
     ]);
 
     const toggleStar = (i, coin) => {
         addToWatchlist(coin)
-        .then(() => {
-            let newStars = star.map((star, index) => {
-                if (i === index) {
-                    return {
-                        ...star,
-                        starFilled: !star.starFilled
+            .then(() => {
+                let newStars = star.map((star, index) => {
+                    if (i === index) {
+                        return {
+                            ...star,
+                            starFilled: !star.starFilled
+                        };
+                    } else {
+                        return star;
                     };
-                } else {
-                    return star;
-                };
-            });
-            setStar(newStars);
-        })
-        .catch(() => {
-            deleteFromWatchlist(coin)
-            let newStars = star.map((star, index) => {
-                if (i === index) {
-                    return {
-                        ...star,
-                        starFilled: !star.starFilled
+                });
+                setStar(newStars);
+            })
+            .catch(() => {
+                deleteFromWatchlist(coin)
+                let newStars = star.map((star, index) => {
+                    if (i === index) {
+                        return {
+                            ...star,
+                            starFilled: !star.starFilled
+                        };
+                    } else {
+                        return star;
                     };
-                } else {
-                    return star;
-                };
+                });
+                setStar(newStars);
             });
-            setStar(newStars);
-        });
     };
 
     return (
         <div className={classes.root}>
             <Paper className={classes.test}>
                 <Typography variant='h3' style={{ 'font-weight': 'bold' }}>Top Cryptocurrencies</Typography>
+                <NewsCard />
                 <Table className={classes.tableContainer}>
                     <TableHead>
                         <TableRow>
@@ -157,7 +159,7 @@ const CoinList = (props) => {
                                         <button key={i} onClick={() => toggleStar(i, coin.symbol.toUpperCase())}>
                                             {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
                                         </button>
-                                        </TableCell>
+                                    </TableCell>
                                     <TableCell>{coin.market_cap_rank}</TableCell>
                                     <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
                                     <TableCell>{coin.symbol.toUpperCase()}</TableCell>

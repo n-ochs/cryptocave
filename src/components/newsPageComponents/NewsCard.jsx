@@ -1,103 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Button, CardActionArea, Grid } from '@material-ui/core'
-
+import axios from 'axios'
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 345,
-        boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-        "&:hover": {
-            boxShadow: "0 16px 80px -12.125px rgba(0,0,0,0.5)"
-        },
-
-
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
     },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+    gridList: {
+        flexWrap: 'nowrap',
+        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+        transform: 'translateZ(0)',
     },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
+    title: {
+        color: theme.palette.primary.light,
     },
-    expandOpen: {
-        transform: 'rotate(180deg)',
+    titleBar: {
+        background:
+            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
-    avatar: {
-        backgroundColor: red[500],
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-}))
+}));
 
 export default function NewsCard({ article }) {
     console.log(article)
     const classes = useStyles()
-    const [expanded, setExpanded] = useState(false)
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded)
-    }
+    const [newsTop, setNewsTop] = useState(null)
+
+    useEffect(async () => {
+        const res = await axios.get('http://newsapi.org/v2/everything?q=cryptocurrency&sortBy=publishedAt&apiKey=c5277bbf8a444cbabab89db5e6b4fd47')
+        await setNewsTop(res.data.articles)
+
+    }, [])
 
     return (
 
-        <Card className={classes.root} variant="outlined">
-            <CardActionArea>
-                <a href={article.url}>
-                    <CardHeader
-                        title={article.title}
-                        subheader={article.publishedAt}
-                    />
-                    <CardMedia
-                        className={classes.media}
-                        image={article.urlToImage ? article.urlToImage : process.env.PUBLIC_URL + '/images/noimage.jpeg'}
-                        title={article.title}
-                    />
-                </a>
-            </CardActionArea>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton
-                    className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </IconButton>
-            </CardActions>
+        <div className={classes.root}>
+            <GridList className={classes.gridList} cols={2.5}>
 
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {article.description}
-                    </Typography>
-                </CardContent>
-            </Collapse>
-        </Card>
-
+                {newsTop &&
+                    (
+                        newsTop.map((tile) => (
+                            <GridListTile key={tile.urlToImage}>
+                                <img src={tile.urlToImage} alt={tile.title} />
+                                <GridListTileBar
+                                    title={tile.title}
+                                    classes={{
+                                        root: classes.titleBar,
+                                        title: classes.title,
+                                    }}
+                                    actionIcon={
+                                        <IconButton aria-label={`star ${tile.title}`}>
+                                            <StarBorderIcon className={classes.title} />
+                                        </IconButton>
+                                    }
+                                />
+                            </GridListTile>
+                        ))
+                    )
+                }
+            </GridList>
+        </div>
     );
 }
