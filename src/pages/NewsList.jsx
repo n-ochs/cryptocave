@@ -13,7 +13,7 @@ const NewsList = () => {
 
 
     return (
-        <div>dsd</div>
+        <div>remove</div>
     )
 }
 
