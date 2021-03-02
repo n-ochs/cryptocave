@@ -31,7 +31,10 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2)
     },
     priceChart: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        '&:hover': {
+            cursor: 'crosshair'
+        }
 
     },
     desc: {

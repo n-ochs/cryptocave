@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,19 +14,39 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        transition: "transform 0.15s ease-in-out",
+
     },
     gridList: {
         flexWrap: 'nowrap',
-        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
     },
     title: {
-        color: theme.palette.primary.light,
+        color: '#fff',
+        fontSize: '1rem',
+        fontWeight: 'bold'
+
+
+    },
+    tile: {
+        opacity: 1,
+        transition: "transform .4s ease-in-out",
+        '&:hover': {
+            transform: "scale3d(1, 1, 1)",
+            opacity: .6,
+            borderBottom: `5px solid ${theme.palette.secondary.accent}`,
+            cursor: 'pointer',
+        },
+
+
+
     },
     titleBar: {
+
         background:
-            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+            'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%)',
+        backgroundColor: fade('rgba(0, 0, 0, 1)'),
+
     },
 }));
 
@@ -44,13 +65,13 @@ export default function NewsCard({ article }) {
     return (
 
         <div className={classes.root}>
-            <GridList className={classes.gridList} cols={2.5}>
+            <GridList className={classes.gridList}>
 
                 {newsTop &&
                     (
                         newsTop.map((tile) => (
-                            <GridListTile key={tile.urlToImage}>
-                                <img src={tile.urlToImage} alt={tile.title} />
+                            <GridListTile key={tile.urlToImage} className={classes.tile} onClick={() => window.open(`${tile.url}`)}>
+                                <img src={tile.urlToImage ? tile.urlToImage : process.env.PUBLIC_URL + '/coins.jpg'} alt={tile.title} />
                                 <GridListTileBar
                                     title={tile.title}
                                     classes={{
@@ -59,7 +80,7 @@ export default function NewsCard({ article }) {
                                     }}
                                     actionIcon={
                                         <IconButton aria-label={`star ${tile.title}`}>
-                                            <StarBorderIcon className={classes.title} />
+                                            <MenuBookIcon fontSize='large' className={classes.title} />
                                         </IconButton>
                                     }
                                 />
