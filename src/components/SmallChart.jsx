@@ -6,7 +6,7 @@ const SmallChart = ({ coin, price }) => {
 
     const [chartData, setChartData] = useState({})
 
-    const lineColor = price > 0 ? '#66FF66' : '#FF6666'
+    const lineColor = price > 0 ? '#05f4b7' : '#FF6666'
 
     const chart = async (days, interval) => {
         let priceArr = []
@@ -35,7 +35,7 @@ const SmallChart = ({ coin, price }) => {
                             data: priceArr,
                             backgroundColor: ['transparent'],
                             borderColor: `${lineColor}`,
-                            borderWidth: 3
+                            borderWidth: 2
                         }]
                 })
 

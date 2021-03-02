@@ -8,37 +8,48 @@ import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles'
 import { addToWatchlist, deleteFromWatchlist } from '../components/methods/BackendConnection/Watchlist'
 import axios from 'axios';
-import NewsCard from '../components/newsPageComponents/NewsCard'
+import NewsCard from '../components/coinlistcomponents/NewsCard'
+import GlobalData from '../components/coinlistcomponents/GlobalData'
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: theme.spacing(10)
+        paddingTop: '10rem',
+        overflow: 'auto',
+        backgroundColor: theme.palette.primary.main,
+        color: '#fff'
+    },
+    test: {
+        color: theme.palette.secondary.accent,
+        marginTop: theme.spacing(5),
+
+    },
+    star: {
+        color: theme.palette.secondary.accent,
+        fillColor: theme.palette.secondary.accent,
+        '&:hover': {
+            transform: "scale3d(1.3, 1.3, 1)"
+        },
     },
     tableContainer: {
-        minWidth: '85rem',
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(10),
         '& thead th': {
             color: 'white',
             backgroundColor: theme.palette.primary.light,
         },
         '& tbody td': {
-            fontWeight: '300',
+            fontWeight: 500,
+            color: '#fff',
         },
         '& tbody tr:hover': {
-            backgroundColor: '#ededed',
+            backgroundColor: theme.palette.primary.light,
+            cursor: 'pointer',
         },
-        tableRow: {
-            '&:hover': {
-                backgroundColor: '#ededed',
-                cursor: 'pointer',
-            }
 
-        }
-    }
+    },
+
 }));
 
 const CoinList = (props) => {
@@ -134,10 +145,10 @@ const CoinList = (props) => {
     };
 
     return (
-        <div className={classes.root}>
-            <Paper className={classes.test}>
-                <Typography variant='h3' style={{ 'font-weight': 'bold' }}>Top Cryptocurrencies</Typography>
-                <NewsCard />
+        <Grid container justify='center' className={classes.root}>
+            <Typography variant='h2' style={{ 'font-weight': 'bold', marginBottom: '2.2rem', fontSize: '5rem' }}>Crypto Market</Typography>
+            <Grid item xs={10} className={classes.test}>
+                <GlobalData />
                 <Table className={classes.tableContainer}>
                     <TableHead>
                         <TableRow>
@@ -154,18 +165,18 @@ const CoinList = (props) => {
                     <TableBody>
                         {coins && (
                             coins.map((coin, i) => (
-                                <TableRow key={coin.id}>
+                                <TableRow key={coin.id} className={classes.tableData}>
                                     <TableCell>
-                                        <button key={i} onClick={() => toggleStar(i, coin.id)}>
+                                        <IconButton key={i} onClick={() => toggleStar(i, coin.id)} className={classes.star}>
                                             {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
-                                        </button>
+                                        </IconButton>
                                     </TableCell>
-                                    <TableCell>{coin.market_cap_rank}</TableCell>
-                                    <TableCell component={Link} to={`/coins/${coin.id}`} className={classes.tableRow}><Button>{coin.name}</Button></TableCell>
-                                    <TableCell>{coin.symbol.toUpperCase()}</TableCell>
-                                    <TableCell>${coin.current_price.toFixed(2)}</TableCell>
-                                    <TableCell>{coin.price_change_24h.toFixed(2)}%</TableCell>
-                                    <TableCell> ${coin.market_cap}</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.market_cap_rank}</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.name}</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.symbol.toUpperCase()}</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>${coin.current_price.toFixed(2)}</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.price_change_24h.toFixed(2)}%</TableCell>
+                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}> ${coin.market_cap}</TableCell>
                                     <TableCell>
                                         <div style={{ height: '10vh', width: '25vw' }} >
                                             <SmallChart coin={coin} price={coin.price_change_24h} />
@@ -178,6 +189,7 @@ const CoinList = (props) => {
                 </Table>
                 {coins && (
                     <TablePagination
+                        style={{ color: '#fff' }}
                         rowsPerPageOptions={[5, 10]}
                         component="div"
                         count={100}
@@ -186,11 +198,10 @@ const CoinList = (props) => {
                         rowsPerPage={rowsPerPage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
                     />
-
                 )}
 
-            </Paper>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 
