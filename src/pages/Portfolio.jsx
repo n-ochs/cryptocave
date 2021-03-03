@@ -1,9 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Avatar, Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Avatar, Button, Grid, Paper, TextField, Typography, makeStyles } from '@material-ui/core';
 import { updatePortfolio } from '../components/methods/BackendConnection/Portfolio';
+import PortfolioCard from '../components/PortfolioCard';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor: theme.palette.primary.main,
+        minHeight: '100vh',
+        width: '100vw',
+        paddingTop: '8.5rem',
+        display: 'flex',
+
+    },
+    wrapper: {
+        justifyContent: 'center',
+        width: '85%',
+
+    },
+
+}))
 
 const Portfolio = () => {
+
+    const classes = useStyles();
+
+    const [ values, setValues ] = useState({
+        quantity: '',
+        newCoin: '',
+    });
 
     const [portfolio, setPortfolio] = useState([]);
     useEffect(async () => {
@@ -15,12 +41,7 @@ const Portfolio = () => {
         .catch((err) => {
             console.log(err)
         })
-    }, [portfolio]);
-
-    const [ values, setValues ] = useState({
-        quantity: '',
-        newCoin: '',
-    });
+    }, [values]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,20 +61,24 @@ const Portfolio = () => {
     };
 
     return (
-        <div>
 
-            {portfolio && portfolio.map((coin) => {
-                return <h1 key={coin.coin}>{coin.quantity} {coin.coin}</h1>
-            })}
+        <Grid container justify='center' className={classes.root}>
 
-            <TextField label='Quantity' placeholder='Quantity' id='quantity' type='number' name='quantity' value={values.quantity} onChange={handleChange} />
 
-            <TextField label='Coin' placeholder='Coin' id='newCoin' type='string' name='newCoin' value={values.newCoin} onChange={handleChange} />
-
-            <Button type='submit' color='primary' variant='contained' onClick={handleSubmit}>Update Coin</Button>
+            {/* Title */}
+            <Typography variant='h2' style={{ 'font-weight': 'bold', fontSize: '5rem', color: '#fff' }}>Portfolio</Typography>
             
-
-        </div>
+            {/* Update Coin Form */}
+            <Grid item xs={12} style={{textAlign: 'center'}}>
+                <TextField label='Quantity' placeholder='Quantity' id='quantity' type='number' name='quantity' value={values.quantity} onChange={handleChange} style={{border: "solid #36d9df"}} />
+                <TextField label='Coin' placeholder='Coin' id='newCoin' type='string' name='newCoin' value={values.newCoin} onChange={handleChange} />
+                <Button type='submit' color='primary' variant='contained' onClick={handleSubmit}>Update Coin</Button>
+            </Grid>
+            {/* Mapping Portfolio */}
+            <Grid container className={classes.wrapper} style={{justifyContent: "center"}}>
+                <PortfolioCard portfolio={portfolio} />
+            </Grid>
+        </Grid>
     );
 };
 
