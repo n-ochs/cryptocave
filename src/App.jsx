@@ -14,10 +14,13 @@ import { ThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from './components/ui/Themes'
 import Login from './pages/FormLogin'
 import Activation from './components/Activation';
+import { checkForCookie } from './components/methods/Tokens'
 
 function App() {
-    return (
 
+    checkForCookie();
+
+    return (
        <ThemeProvider theme={theme}>
         <GlobalProvider>
             <BrowserRouter>

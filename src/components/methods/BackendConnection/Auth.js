@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { setAuthenticationToken } from '../Tokens';
 const appUrl = "https://cryptocave.netlify.app";
 
 //Signup
@@ -28,12 +28,12 @@ export const login = async (email, password) => {
     })
     .then((res) => {
         if (res.data.token) {
-            axios.defaults.headers.common['Authorization'] = res.data.token;
+            setAuthenticationToken(res.data.token);
             window.location.href = 'localhost:3000/'; //change back to appUrl
         };
     })
     .catch((err) => {
-        window.location.href = `${appUrl}/login`
+        window.location.href = `${appUrl}/login`;
         alert('Your username or password was incorrect. Please try logging in again.');
     });
 };
