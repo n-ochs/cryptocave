@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: '10rem',
+        paddingTop: '8.5rem',
         overflow: 'auto',
         backgroundColor: theme.palette.primary.main,
         color: '#fff'
@@ -144,6 +144,12 @@ const CoinList = (props) => {
             });
     };
 
+
+    const { history } = props
+    const handleCoinClick = (coin) => {
+        history.push(`/coins/${coin}`)
+    }
+
     return (
         <Grid container justify='center' className={classes.root}>
             <Typography variant='h2' style={{ 'font-weight': 'bold', marginBottom: '2.2rem', fontSize: '5rem' }}>Crypto Market</Typography>
@@ -156,8 +162,8 @@ const CoinList = (props) => {
                             <TableCell>Rank</TableCell>
                             <TableCell>Symbol</TableCell>
                             <TableCell>Coin</TableCell>
-                            <TableCell>24h%Change</TableCell>
                             <TableCell>Price</TableCell>
+                            <TableCell>24h%Change</TableCell>
                             <TableCell>Market Cap</TableCell>
                             <TableCell>Last 24h Chart</TableCell>
                         </TableRow>
@@ -171,12 +177,12 @@ const CoinList = (props) => {
                                             {star[i].starFilled ? <StarIcon /> : <StarBorderIcon />}
                                         </IconButton>
                                     </TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.market_cap_rank}</TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.name}</TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.symbol.toUpperCase()}</TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>${coin.current_price.toFixed(2)}</TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}>{coin.price_change_24h.toFixed(2)}%</TableCell>
-                                    <TableCell onClick={() => window.open(`/coins/${coin.id}`)}> ${coin.market_cap}</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}>{coin.market_cap_rank}</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}>{coin.name}</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}>{coin.symbol.toUpperCase()}</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}>${coin.current_price.toFixed(2)}</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}>{coin.price_change_24h}%</TableCell>
+                                    <TableCell onClick={() => handleCoinClick(coin.id)}> ${coin.market_cap}</TableCell>
                                     <TableCell>
                                         <div style={{ height: '10vh', width: '25vw' }} >
                                             <SmallChart coin={coin} price={coin.price_change_24h} />

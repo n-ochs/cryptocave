@@ -130,7 +130,7 @@ const Chart = ({ coin }) => {
                     value={time}
                     onChange={handleChange}
                 >
-                    <MenuItem onClick={() => chart(2, 'hourly')} value='24'>24h</MenuItem>
+                    <MenuItem onClick={() => chart(2, 'hourly')} value='48'>48h</MenuItem>
                     <MenuItem onClick={() => chart(7, 'daily')} value='7'>7 Day</MenuItem>
                     <MenuItem onClick={() => chart(14, 'daily')} value='14'>14 Day</MenuItem>
                     <MenuItem onClick={() => chart(30, 'daily')} value='30'>30 Day</MenuItem>

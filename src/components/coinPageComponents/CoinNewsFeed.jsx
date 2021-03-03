@@ -26,8 +26,9 @@ const CoinNewsFeed = ({ coin }) => {
     const classes = useStyles()
 
     useEffect(async () => {
-        const data = await axios.get(`/posts/?auth_token=e0a27bc786203eea879f983882f4b94dde4c690a&currencies=${coin.symbol}`)
-        setNewsFeed(data.data.results)
+        await axios.get(`https://cryptopanic.com/api/v1/posts/?auth_token=e0a27bc786203eea879f983882f4b94dde4c690a&currencies=${coin.symbol}`)
+            .then((res) => setNewsFeed(res.data.results))
+            .catch(e => console.log(e))
     }, [])
 
     return (
@@ -35,7 +36,7 @@ const CoinNewsFeed = ({ coin }) => {
             {newsFeed && (
                 <Box>
                     <Typography className={classes.title}>Feed</Typography>
-                    {newsFeed.map((article) => (
+                    {newsFeed && (newsFeed.map((article) => (
                         <div>
                             <a href={`${article.url}`} style={{ textDecoration: 'none', color: 'inherit' }} key={article.id}>
 
@@ -44,7 +45,7 @@ const CoinNewsFeed = ({ coin }) => {
                             </a>
                         </div>
 
-                    ))}
+                    )))}
                 </Box>
             )}
 
