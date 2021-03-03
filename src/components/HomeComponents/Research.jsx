@@ -56,7 +56,8 @@ function Discover() {
                         <Typography variant='h3' className={classes.titleText}>Stay Informed</Typography>
                     </Grid>
                     <Grid item xs={4} checked={checked} className={classes.descWrapper}>
-                        <Typography variant='subtitle1' className={classes.contentText}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, architecto voluptates esse tenetur recusandae voluptate quis reprehenderit, doloribus necessitatibus accusantium molestias perspiciatis. Nostrum aliquid saepe deserunt distinctio, nihil reiciendis beatae!</Typography>
+                        <Typography variant='subtitle1' className={classes.contentText}>Create your own custom watchlist to keep track of all your favorite coins. Learn the markets and never miss a beat by staying up to date with top news</Typography>
+
                     </Grid>
                 </Paper>
             </Grow>

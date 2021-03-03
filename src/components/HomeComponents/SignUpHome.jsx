@@ -75,7 +75,7 @@ function SignUpHome() {
                     </Grid>
                     <Grid item xs={12} checked={checked} className={classes.contentWrapper}>
                         <Button className={classes.btn} variant="filled" color="secondary" size="large" component={Link} to={'/signup'}>
-                            Sign In
+                            Sign Up
                         </Button>
                     </Grid>
                 </Paper>

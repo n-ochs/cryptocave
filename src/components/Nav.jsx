@@ -15,6 +15,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import { withRouter } from 'react-router-dom';
 import SearchCoins from './SearchCoins'
 import SortIcon from '@material-ui/icons/Sort';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 
 const drawerWidth = 240;
 
@@ -88,8 +90,9 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 const Nav = (props) => {
-    const { history } = props
+    const { history, children, window } = props
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -111,18 +114,10 @@ const Nav = (props) => {
                 handleDrawerClose()
             }
         }, {
-            text: 'Cryptocurrencies',
+            text: 'The Market',
             icon: <MonetizationOnIcon />,
             onClick: () => {
                 history.push('/coinlist')
-                handleDrawerClose()
-            }
-        },
-        {
-            text: 'Top News',
-            icon: <MenuBookIcon />,
-            onClick: () => {
-                history.push('/newslist')
                 handleDrawerClose()
             }
         }
@@ -144,45 +139,49 @@ const Nav = (props) => {
                 history.push('/portfolio')
                 handleDrawerClose()
             }
-        },
-        {
-            text: 'Profile',
-            icon: <AccountCircleIcon />,
-            onClick: () => {
-                history.push('/profile')
-                handleDrawerClose()
-            }
         }
     ]
+
+
+    function HideOnScroll(props) {
+        const trigger = useScrollTrigger({ target: window ? window() : undefined });
+        return (
+            <Slide appear={false} direction="down" in={!trigger}>
+                {props.children}
+            </Slide>
+        )
+    }
+
 
     return (
 
         <div className={classes.root}>
-            <AppBar
-                elevation={0}
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <SortIcon fontSize='large' />
-                    </IconButton>
-                    <Typography variant="h6" noWrap style={{ fontWeight: 'bold' }}>
-                        Crypto <span style={{ color: '#36d9df' }}>Cave</span>
-                    </Typography>
+            <HideOnScroll {...props}>
+                <AppBar
+                    elevation={0}
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: open,
+                    })}
+                >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <SortIcon fontSize='large' />
+                        </IconButton>
+                        <Typography variant="h6" noWrap style={{ fontWeight: 'bold' }}>
+                            Crypto <span style={{ color: '#36d9df' }}>Cave</span>
+                        </Typography>
 
-                    <SearchCoins />
+                        <SearchCoins />
 
-                </Toolbar>
-            </AppBar>
-
+                    </Toolbar>
+                </AppBar>
+            </HideOnScroll>
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
