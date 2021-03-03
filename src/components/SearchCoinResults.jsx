@@ -29,17 +29,7 @@ const SearchCoinResults = ({ coinSearch }) => {
                 <span>{coinSearch.coin.symbol.toUpperCase() + ' - '}</span>
                 <span>{coinSearch.coin.name}</span>
             </Link>
-            <span>
-                <button onClick={() => addCoinWatchlist(coinSearch.coin)} disabled={coinDisableWatchlist}>+W</button>
-                <button onClick={() => addCoinPortfolio(coinSearch.coin)} >+P</button>
 
-                <span>
-                    <button onClick={() => setButtonPopup(true)}>open</button>
-                    <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                        <AddPortfolioForm coinSearch={coinSearch} />
-                    </Popup>
-                </span>
-            </span>
         </>
     )
 }
