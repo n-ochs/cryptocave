@@ -36,6 +36,6 @@ export const deleteFromWatchlist = async (coin) => {
     await axios.post(`${process.env.REACT_APP_BACKEND_CONNECTION}/wl/delete`, {
         deletedCoin: coin
     })
-    .then(() => console.log('success'))
-    .catch(() => console.log('error!!!'))
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
 };
