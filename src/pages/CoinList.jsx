@@ -160,8 +160,8 @@ const CoinList = (props) => {
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell>Rank</TableCell>
-                            <TableCell>Symbol</TableCell>
                             <TableCell>Coin</TableCell>
+                            <TableCell>Symbol</TableCell>
                             <TableCell>Price</TableCell>
                             <TableCell>24h%Change</TableCell>
                             <TableCell>Market Cap</TableCell>
@@ -196,7 +196,7 @@ const CoinList = (props) => {
                 {coins && (
                     <TablePagination
                         style={{ color: '#fff' }}
-                        rowsPerPageOptions={[5, 10]}
+                        rowsPerPageOptions={[5]}
                         component="div"
                         count={100}
                         page={page}

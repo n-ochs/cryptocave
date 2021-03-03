@@ -13,6 +13,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         border: `4px solid ${theme.palette.secondary.accent}`,
         margin: '.5rem',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     headerTitle: {
@@ -38,11 +40,11 @@ function WatchlistCard(props) {
 
                 return (
                     <Grid container xs={3} key={coin.coin} className={classes.root}>
-                            <Grid item style={{background: "white", height: "100%", width: "100%", textAlign: "center"}}>
-                                <Typography variant="body2" component="p" style={{fontSize: "200%", fontWeight: "bold"}}>
-                                    {coin.quantity} {coin.coin}
-                                </Typography>
-                            </Grid>
+                        <Grid item style={{ background: "white", textAlign: "center" }}>
+                            <Typography variant="body2" component="p" style={{ fontSize: "200%", fontWeight: "bold", color: '#fff', backgroundColor: '#12151f' }}>
+                                {coin.quantity} {coin.coin}
+                            </Typography>
+                        </Grid>
                     </Grid>
                 )
             })}
