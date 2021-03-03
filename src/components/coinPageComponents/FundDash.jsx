@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 }))
 function FundDash({ coin }) {
     const classes = useStyles()
-    console.log(coin)
     return (
         <>
             <Grid container direction="row" spacing={2} className={classes.wrapper}>

@@ -57,7 +57,7 @@ export default function NewsCard({ article }) {
     const [newsTop, setNewsTop] = useState(null)
 
     useEffect(async () => {
-        const res = await axios.get('http://newsapi.org/v2/everything?q=cryptocurrency&sortBy=publishedAt&apiKey=c5277bbf8a444cbabab89db5e6b4fd47')
+        const res = await axios.get('https://newsapi.org/v2/everything?q=cryptocurrency&sortBy=publishedAt&apiKey=c5277bbf8a444cbabab89db5e6b4fd47')
         await setNewsTop(res.data.articles)
 
     }, [])
