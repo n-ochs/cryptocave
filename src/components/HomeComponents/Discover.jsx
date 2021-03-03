@@ -51,7 +51,7 @@ function Discover() {
                         <Typography variant='h3' className={classes.titleText}>Discover <br />New Coins</Typography>
                     </Grid>
                     <Grid item xs={4} checked={checked} className={classes.contentWrapper}>
-                        <Typography variant='subtitle1' className={classes.contentText}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, architecto voluptates esse tenetur recusandae voluptate quis reprehenderit, doloribus necessitatibus accusantium molestias perspiciatis. Nostrum aliquid saepe deserunt distinctio, nihil reiciendis beatae!</Typography>
+                        <Typography variant='subtitle1' className={classes.contentText}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, architecto voluptates esse tenetur recusandae voluptate quis reprehenderit, doloribus necessitatibus accusantium molestias perspiciatis. Nostrum aliquid saepe deserunt distinctio, nihil reiciendis beatae! </Typography>
                     </Grid>
                 </Paper>
             </Grow>
