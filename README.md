@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Crypto Cave
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Cryptocave is an online web application that allows users to research new and existing cryptocurrencies, keep up with the latest news surrounding the market, and keep track of their own portfolio.
 
-## Available Scripts
+## Scope of Functionalities
+Registered users are able to search for thousands of coins and take part in a booming market first hand. With easy-to-use graphs, users can observe trends and analyze data over any historical period. In order to stay up to date with their favorite coins, users can also add them to their own custom watchlist, which will display their respective information in a neat, organized manner. To track their own portfolio over time, users are able to add and delete coins to their own custom portfolio, which is kept secure in our NoSQL database. Take a look at our back end source code [here](https://github.com/n-ochs/cryptocave-backend).
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+Clone or fork [this repository](https://github.com/n-ochs/cryptocave) and run:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install
+npm run start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technology Stack
+The main technologies that Crypto Cave utilizes include: 
+* [MongoDB](https://www.mongodb.com/) - Database
+* [Express](https://expressjs.com/) - Connecting the database
+* [React](https://reactjs.org/) - Front end framework
+* [Node.js](https://nodejs.org/en/) - Server side
 
-### `npm test`
+Other technologies include:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* [Axios](https://github.com/axios/axios) - make multiple asynchronous HTTP requests
+* [Mailgun](https://www.mailgun.com/) - provide email verification to users upon registration
+* [JWT](https://jwt.io/) & [JS-Cookie](https://github.com/js-cookie/js-cookie) - provide authorization for each request made to the database
+* [Chart.js](https://www.chartjs.org/) - in order to display visual data to users and to observe trends over time
+* [Material-UI](https://material-ui.com/) - overall design
+* [Netlify](https://www.netlify.com/) - application hosting
 
-### `npm run build`
+## Sources Used
+For users making life choices as critical as investing their hard earned money or users simply wanting to do their own due diligence, we knew that we needed to provide our users with the most accurate data available. That's why we decided to use the world's most comprehensive cryptocurrency API - [CoinGecko](https://www.coingecko.com/en/api). With CoinGecko, we are able to provide statistics for almost any coin, including but not limited to: market cap, volume, time-interval percentage performance, historical data, and trending news.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Status
+Website is currently deployed and running stable.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Future Updates
+We are looking into developing a native mobile application for users that will include an education portal for users that are looking for that extra knowledge. Please stay tuned for more information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributors
+| Developer                                      | Role        |
+| :--------------------------------------------- | :----------:|
+| [Eric Owen](https://github.com/eric-owen)      | Front End   |
+| [Nick Ochs](https://github.com/n-ochs)         | Back End    |
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Have an idea, suggestion, or need assistance?
+Pull requests are welcome. Please open an issue first to discuss the suggested changes.
